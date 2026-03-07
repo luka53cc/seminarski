@@ -4,14 +4,14 @@
  */
 package niti;
 
+import controller.Controller;
+import domen.Instruktor;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import komunikacija.Odgovor;
-import komunikacija.Posiljalac;
-import komunikacija.Primalac;
-import komunikacija.Zahtev;
+import komunikacija.*;
+
 
 /**
  *
@@ -33,17 +33,24 @@ public class ObradaKlijentskihZahteva extends Thread{
     @Override
     public void run() {
         while (!kraj) {            
-            Zahtev zahtev = (Zahtev) primalac.primi();
-            Odgovor odgovor = new Odgovor();
-            
-            switch (zahtev.getOperacija()) {
-                //case 1:
-                    
-                //    break;
-                default:
-                    System.out.println("GRESKA, OPERACIJA NE POSTOJI");
+            try {
+                Zahtev zahtev = (Zahtev) primalac.primi();
+                Odgovor odgovor = new Odgovor();
+                
+                switch (zahtev.getOperacija()) {
+                    case LOGIN:
+                        Instruktor i = (Instruktor) zahtev.getParam();
+                        // moze i sa novim ovim instruktorom
+                        i =Controller.getInstance().login(i);
+                        odgovor.setOdgovor(i);
+                        break;
+                    default:
+                        System.out.println("GRESKA, OPERACIJA NE POSTOJI");
+                }
+                posiljalac.posalji(odgovor);
+            } catch (Exception ex) {
+                Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
             }
-            posiljalac.posalji(odgovor);
         }
     }
     public void prekiniNit(){

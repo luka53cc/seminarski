@@ -5,12 +5,10 @@
 package konfiguracija;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -23,7 +21,7 @@ public class Konfiguracija {
     private Konfiguracija() {
         konf = new Properties();
         try {
-            konf.load(new FileInputStream("C:\\PS_K1\\2023_0067\\Seminarski_Server\\config.properties"));
+            konf.load(new FileInputStream("C:\\PS_K1\\seminarski\\Seminarski_Server\\config.properties"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
