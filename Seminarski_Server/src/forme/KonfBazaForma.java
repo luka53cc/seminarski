@@ -23,6 +23,8 @@ public class KonfBazaForma extends javax.swing.JDialog {
         jTextField2.setText(Konfiguracija.getInstance().getProperty("username"));
         jPasswordField1.setText(Konfiguracija.getInstance().getProperty("password"));
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
