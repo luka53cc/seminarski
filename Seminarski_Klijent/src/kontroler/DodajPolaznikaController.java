@@ -47,8 +47,6 @@ public class DodajPolaznikaController {
                     Komunikacija.getInstance().dodajPolaznika(p);
                     JOptionPane.showMessageDialog(dpf, "Sistem je zapamtio polaznika", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
 
-                    Koordinator.getInstance().osveziTabeluPolaznika();
-
                     dpf.dispose();
                     
                 } catch (Exception ex) {

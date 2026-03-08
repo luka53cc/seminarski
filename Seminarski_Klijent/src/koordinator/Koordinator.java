@@ -65,7 +65,7 @@ public class Koordinator {
     }
 
     public void osveziTabeluPolaznika() {
-        dpController.pripremiFormu();
+        ppController.pripremiFormu();
     }
 
 
