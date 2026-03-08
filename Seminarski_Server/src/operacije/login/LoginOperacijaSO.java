@@ -12,12 +12,15 @@ import operacije.ApstraktnaGenerickaOperacija;
  *
  * @author Luka
  */
-public class LoginOperacija extends ApstraktnaGenerickaOperacija{
+public class LoginOperacijaSO extends ApstraktnaGenerickaOperacija{
     
     Instruktor instruktor;
     
     @Override
     protected void preduslovi(Object objekat) throws Exception {
+        /*if (objekat==null || !(objekat instanceof Instruktor)) {
+            throw new Exception("Sistemu nije prosledjeno odgovarajuce");
+        }*/
     }
     @Override
     protected void izvrsiOperaciju(Object objekat, String kljuc) throws Exception {

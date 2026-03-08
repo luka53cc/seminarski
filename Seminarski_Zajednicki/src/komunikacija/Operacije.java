@@ -11,5 +11,5 @@ import java.io.Serializable;
  * @author Luka
  */
 public enum Operacije implements Serializable{
-    LOGIN,  
+    LOGIN, UCITAJ_POLAZNIKE, OBRISI_POLAZNIKA, UCITAJ_KATEGORIJE, DODAJ_POLAZNIKA,  
 }

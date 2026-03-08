@@ -4,16 +4,27 @@
  */
 package koordinator;
 
+import domen.Instruktor;
+import forme.DodajPolaznikaForma;
+import forme.GlavnaForma;
 import forme.LoginForma;
+import forme.PrikazPolaznikaForma;
+import kontroler.DodajPolaznikaController;
+import kontroler.GlavnaFormaController;
 import kontroler.LoginController;
+import kontroler.PrikazPolaznikaController;
 
 /**
  *
  * @author Luka
  */
 public class Koordinator {
+    private Instruktor ulogovan;
     private static Koordinator instance;
     private LoginController loginController;
+    private GlavnaFormaController glavnaFormaController;
+    private PrikazPolaznikaController ppController;
+    private DodajPolaznikaController dpController;
     private Koordinator() {
         
     }
@@ -29,4 +40,37 @@ public class Koordinator {
         loginController = new LoginController(new LoginForma());
         loginController.otvoriFormu();
     }
+
+    public void otvoriGlavnuFormu() {
+        glavnaFormaController = new GlavnaFormaController(new GlavnaForma());
+        glavnaFormaController.otvoriFormu();
+    }
+    public void otvoriPrikazPolaznikaFormu() {
+        ppController = new PrikazPolaznikaController(new PrikazPolaznikaForma());
+        ppController.otvoriFormu();
+        
+    }
+    public void otvoriDodajPacijentaFormu() {
+        dpController = new DodajPolaznikaController(new DodajPolaznikaForma());
+        dpController.otvoriFormu();
+    }
+
+
+    public Instruktor getUlogovan() {
+        return ulogovan;
+    }
+
+    public void setUlogovan(Instruktor ulogovan) {
+        this.ulogovan = ulogovan;
+    }
+
+    public void osveziTabeluPolaznika() {
+        dpController.pripremiFormu();
+    }
+
+
+
+    
+    
+    
 }

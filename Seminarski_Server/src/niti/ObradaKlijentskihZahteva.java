@@ -6,8 +6,11 @@ package niti;
 
 import controller.Controller;
 import domen.Instruktor;
+import domen.Kategorija;
+import domen.Polaznik;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import komunikacija.*;
@@ -43,6 +46,32 @@ public class ObradaKlijentskihZahteva extends Thread{
                         // moze i sa novim ovim instruktorom
                         i =Controller.getInstance().login(i);
                         odgovor.setOdgovor(i);
+                        break;
+                    case UCITAJ_POLAZNIKE:
+                        List<Polaznik> polaznici = Controller.getInstance().ucitajPolaznike();
+                        odgovor.setOdgovor(polaznici);
+                        break;
+                    case OBRISI_POLAZNIKA:
+                        try {
+                            Polaznik p = (Polaznik) zahtev.getParam();
+                            Controller.getInstance().obrisiPolaznika(p);
+                            odgovor.setOdgovor(null);
+                        } catch (Exception e) {
+                            odgovor.setOdgovor(e);
+                        }
+                        break;
+                    case UCITAJ_KATEGORIJE:
+                        List<Kategorija> kategorije = Controller.getInstance().ucitajKategorije();
+                        odgovor.setOdgovor(kategorije);
+                        break;
+                    case DODAJ_POLAZNIKA:
+                        try {
+                            Polaznik p = (Polaznik) zahtev.getParam();
+                            Controller.getInstance().dodajPacijenta(p);
+                            odgovor.setOdgovor(null);
+                        } catch (Exception e) {
+                            odgovor.setOdgovor(e);
+                        }
                         break;
                     default:
                         System.out.println("GRESKA, OPERACIJA NE POSTOJI");

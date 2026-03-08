@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
+import koordinator.Koordinator;
 
 /**
  *
@@ -42,8 +43,10 @@ public class LoginController {
                 if (i==null) {
                     JOptionPane.showMessageDialog(lf, "Nije uspesno ulogovan", "Greska", JOptionPane.ERROR_MESSAGE);
                 }else{
-                JOptionPane.showMessageDialog(lf, "Uspesno ulogovan", "USpeh", JOptionPane.INFORMATION_MESSAGE);
-                lf.dispose();
+                    Koordinator.getInstance().setUlogovan(i);
+                    JOptionPane.showMessageDialog(lf, "Uspesno ulogovan", "USpeh", JOptionPane.INFORMATION_MESSAGE);
+                    Koordinator.getInstance().otvoriGlavnuFormu();
+                    lf.dispose();
                 }
                     
                 

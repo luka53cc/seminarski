@@ -30,7 +30,8 @@ public abstract class ApstraktnaGenerickaOperacija {
             ponistiTransakciju();
             throw e;
         } finally {
-            ugasiKonekciju();
+            //ugasi kad se izlogujes
+            //ugasiKonekciju();
         }
     }
 

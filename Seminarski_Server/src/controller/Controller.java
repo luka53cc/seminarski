@@ -5,7 +5,14 @@
 package controller;
 
 import domen.Instruktor;
-import operacije.login.LoginOperacija;
+import domen.Kategorija;
+import domen.Polaznik;
+import java.util.List;
+import operacije.kategorije.UcitajKategorijeSO;
+import operacije.login.LoginOperacijaSO;
+import operacije.polaznici.KreirajPolaznikaSO;
+import operacije.polaznici.ObrisiPolaznikaSO;
+import operacije.polaznici.UcitajPolaznikeSO;
 
 /**
  *
@@ -26,9 +33,38 @@ public class Controller {
     }
 
     public Instruktor login(Instruktor i) throws Exception {
-        LoginOperacija operacija = new LoginOperacija();
+        LoginOperacijaSO operacija = new LoginOperacijaSO();
         operacija.izvrsi(i, null);
         System.out.println("klasa Controller: "+operacija.getInstruktor());
         return operacija.getInstruktor();
+    }
+
+    public List<Polaznik> ucitajPolaznike() throws Exception {
+        UcitajPolaznikeSO operacija = new UcitajPolaznikeSO();
+        operacija.izvrsi(null, null);
+        System.out.println("klasa Controller: "+operacija.getPolaznici());
+
+        return operacija.getPolaznici();
+    }
+
+    public void obrisiPolaznika(Polaznik p) throws Exception {
+        ObrisiPolaznikaSO operacija = new ObrisiPolaznikaSO();
+        operacija.izvrsi(p, null);
+        
+    }
+
+    public List<Kategorija> ucitajKategorije() throws Exception {
+        UcitajKategorijeSO operacija = new UcitajKategorijeSO();
+        operacija.izvrsi(null, null);
+        System.out.println("klasa Controller: "+operacija.getKategorije());
+
+        return operacija.getKategorije();
+        
+    }
+
+    public void dodajPacijenta(Polaznik p) throws Exception {
+        KreirajPolaznikaSO operacija = new KreirajPolaznikaSO();
+        operacija.izvrsi(p, null);
+        
     }
 }

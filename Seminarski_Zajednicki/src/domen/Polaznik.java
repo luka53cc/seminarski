@@ -138,6 +138,8 @@ public class Polaznik implements ApstraktniDomenskiObjekat{
             Kategorija k = new Kategorija(idKat, null, null);
             Polaznik p = new Polaznik(id, imeP, jmbg, datum, k);
             lista.add(p);
+            
+            //popravi ovoooooo
         }
         
         

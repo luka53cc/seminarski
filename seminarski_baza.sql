@@ -45,9 +45,12 @@ CREATE TABLE `instruktor` (
   `brojTelefona` varchar(50) NOT NULL,
   `datumZaposlenja` date NOT NULL,
   PRIMARY KEY (`idInstruktor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `instruktor` */
+
+insert  into `instruktor`(`idInstruktor`,`imePrezimeInstruktora`,`korisnickoIme`,`sifra`,`brojTelefona`,`datumZaposlenja`) values 
+(1,'Rade Kosmajac','Radenko','Radenko1!','0654579630','2026-02-28');
 
 /*Table structure for table `kategorija` */
 
@@ -58,9 +61,14 @@ CREATE TABLE `kategorija` (
   `nazivKategorije` varchar(50) NOT NULL,
   `opisKategorije` varchar(50) NOT NULL,
   PRIMARY KEY (`idKategorija`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `kategorija` */
+
+insert  into `kategorija`(`idKategorija`,`nazivKategorije`,`opisKategorije`) values 
+(1,'Vatrogasac-pripravnik','Lice na osnovnoj obuci za rad u jedinici.'),
+(2,'Vatrogasac I klase','Iskusni operativac sa položenim ispitom.'),
+(3,'Vatrogasac-spasilac','Specijalista za rad u ekstremnim uslovima.');
 
 /*Table structure for table `licenca` */
 
@@ -87,9 +95,20 @@ CREATE TABLE `polaznik` (
   PRIMARY KEY (`idPolaznik`),
   KEY `idKategorija` (`idKategorija`),
   CONSTRAINT `polaznik_ibfk_1` FOREIGN KEY (`idKategorija`) REFERENCES `kategorija` (`idKategorija`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `polaznik` */
+
+insert  into `polaznik`(`idPolaznik`,`imePrezimePolaznika`,`jmbgPolaznika`,`datumRodjenjaPolaznika`,`idKategorija`) values 
+(1,'Mile Kitic','0101004710005','2004-01-01',3),
+(5,'Uros Zivkovic','1505004710271','2004-05-15',2),
+(6,'Marko Sokolovic','2010003710156','2003-01-20',3),
+(10,'Barbara Bobak','0707004715014','2004-07-07',1),
+(19,'Barbara Bobak','0707004715014','2004-07-07',1),
+(20,'gggfds','0202005710040','2005-02-02',1),
+(21,'Luka Spanovic','0202005710040','2005-02-02',1),
+(22,'Luakaa','0202005710040','2005-02-02',1),
+(23,'kjhgfd','0202005710040','2005-02-02',1);
 
 /*Table structure for table `stavkazapisnika` */
 
