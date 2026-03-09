@@ -67,7 +67,16 @@ public class ObradaKlijentskihZahteva extends Thread{
                     case DODAJ_POLAZNIKA:
                         try {
                             Polaznik p = (Polaznik) zahtev.getParam();
-                            Controller.getInstance().dodajPacijenta(p);
+                            Controller.getInstance().dodajPolaznika(p);
+                            odgovor.setOdgovor(null);
+                        } catch (Exception e) {
+                            odgovor.setOdgovor(e);
+                        }
+                        break;
+                    case IZMENI_POLAZNIKA:
+                        try {
+                            Polaznik p1 = (Polaznik) zahtev.getParam();
+                            Controller.getInstance().izmeniPolaznika(p1);
                             odgovor.setOdgovor(null);
                         } catch (Exception e) {
                             odgovor.setOdgovor(e);

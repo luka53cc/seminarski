@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import koordinator.Koordinator;
 
 /**
  *
@@ -110,6 +111,22 @@ public class Komunikacija {
             throw (Exception)odg.getOdgovor();
         }
        
+    }
+
+    public void izmeniPolaznika(Polaznik p) throws Exception {
+        Zahtev z = new Zahtev(Operacije.IZMENI_POLAZNIKA, p);
+        posiljalac.posalji(z);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor()==null ) {
+            Koordinator.getInstance().osveziFormu();
+        }else{
+            throw (Exception)odg.getOdgovor();
+        }
+       
+
+
+
     }
     
     

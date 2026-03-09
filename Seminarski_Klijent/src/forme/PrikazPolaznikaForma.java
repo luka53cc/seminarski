@@ -4,8 +4,10 @@
  */
 package forme;
 
+import domen.Kategorija;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -34,9 +36,17 @@ public class PrikazPolaznikaForma extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePolaznici = new javax.swing.JTable();
         jButtonPretrazi = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jButtonObrisi = new javax.swing.JButton();
         jButtonIzmeni = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldIP = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldJMBG = new javax.swing.JTextField();
+        jComboBoxKategorija = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jTextFieldDate = new javax.swing.JTextField();
+        jButtonResetuj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +69,16 @@ public class PrikazPolaznikaForma extends javax.swing.JFrame {
 
         jButtonIzmeni.setText("Izmeni");
 
+        jLabel1.setText("Ime i prezime:");
+
+        jLabel3.setText("JMBG:");
+
+        jLabel4.setText("Kategorija:");
+
+        jLabel5.setText("Datum rodjenja:");
+
+        jButtonResetuj.setText("Resetuj");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,35 +87,66 @@ public class PrikazPolaznikaForma extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonPretrazi))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldIP, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldJMBG, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonIzmeni)
-                            .addComponent(jButtonObrisi))))
-                .addContainerGap(9, Short.MAX_VALUE))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldDate)
+                            .addComponent(jComboBoxKategorija, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButtonObrisi)
+                        .addComponent(jButtonPretrazi)
+                        .addComponent(jButtonIzmeni))
+                    .addComponent(jButtonResetuj))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPretrazi))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jComboBoxKategorija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonPretrazi))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonResetuj)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(42, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextFieldJMBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonObrisi)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonIzmeni)
-                        .addGap(119, 119, 119))))
+                        .addGap(119, 119, 119))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -117,9 +168,7 @@ public class PrikazPolaznikaForma extends javax.swing.JFrame {
         return jButtonPretrazi;
     }
 
-    public JTextField getjTextField1() {
-        return jTextField1;
-    }
+
 
 
     
@@ -129,12 +178,53 @@ public class PrikazPolaznikaForma extends javax.swing.JFrame {
     private javax.swing.JButton jButtonIzmeni;
     private javax.swing.JButton jButtonObrisi;
     private javax.swing.JButton jButtonPretrazi;
+    private javax.swing.JButton jButtonResetuj;
+    private javax.swing.JComboBox<Kategorija> jComboBoxKategorija;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePolaznici;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldDate;
+    private javax.swing.JTextField jTextFieldIP;
+    private javax.swing.JTextField jTextFieldJMBG;
     // End of variables declaration//GEN-END:variables
 
     public void addbtnObrisiActionListener(ActionListener actionListener) {
         jButtonObrisi.addActionListener(actionListener);
     }
+    public void addbtnIzmeniActionListener(ActionListener actionListener) {
+        jButtonIzmeni.addActionListener(actionListener);
+    }
+    public void addbtnPretraziActionListener(ActionListener actionListener) {
+        jButtonPretrazi.addActionListener(actionListener);
+    }
+    public void addbtnResetujActionListener(ActionListener actionListener) {
+        jButtonPretrazi.addActionListener(actionListener);
+    }
+
+
+    public JTextField getjTextFieldDate() {
+        return jTextFieldDate;
+    }
+
+
+
+    public JTextField getjTextFieldIP() {
+        return jTextFieldIP;
+    }
+
+    public JComboBox<Kategorija> getjComboBoxKategorija() {
+        return jComboBoxKategorija;
+    }
+
+    public JTextField getjTextFieldJMBG() {
+        return jTextFieldJMBG;
+    }
+
+
+    
+    
+    
 }

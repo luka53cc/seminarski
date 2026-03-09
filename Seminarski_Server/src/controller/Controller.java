@@ -10,6 +10,7 @@ import domen.Polaznik;
 import java.util.List;
 import operacije.kategorije.UcitajKategorijeSO;
 import operacije.login.LoginOperacijaSO;
+import operacije.polaznici.IzmeniPolaznikaSO;
 import operacije.polaznici.KreirajPolaznikaSO;
 import operacije.polaznici.ObrisiPolaznikaSO;
 import operacije.polaznici.UcitajPolaznikeSO;
@@ -62,9 +63,15 @@ public class Controller {
         
     }
 
-    public void dodajPacijenta(Polaznik p) throws Exception {
+    public void dodajPolaznika(Polaznik p) throws Exception {
         KreirajPolaznikaSO operacija = new KreirajPolaznikaSO();
         operacija.izvrsi(p, null);
         
+    }
+
+    public void izmeniPolaznika(Polaznik p) throws Exception {
+        IzmeniPolaznikaSO operacija = new IzmeniPolaznikaSO();
+        operacija.izvrsi(p, null);
+
     }
 }

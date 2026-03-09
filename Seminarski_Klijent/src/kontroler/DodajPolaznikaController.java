@@ -15,6 +15,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
 import koordinator.Koordinator;
+import modovi.FormaModPolaznikEnum;
 
 /**
  *
@@ -56,22 +57,73 @@ public class DodajPolaznikaController {
                 
             }
         });
+        dpf.addbtnIzmeniActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                izmeni(e);
+            }
+
+            private void izmeni(ActionEvent e) {
+                try {
+                    String imeP=dpf.getjTextFieldIP().getText().trim();
+                    String jmbg = dpf.getjTextFieldJMBG().getText().trim();
+                    String datum = dpf.getjTextFieldDate().getText().trim();
+                    Kategorija kat = (Kategorija) dpf.getjComboBoxKategorija().getSelectedItem();
+                    Long id = Long.valueOf(dpf.getjTextFieldID().getText().trim());
+                    Date datumRodjenja = Date.valueOf(datum);
+                    
+                    Polaznik p =new Polaznik(id, imeP, jmbg, datumRodjenja, kat);
+                    Komunikacija.getInstance().izmeniPolaznika(p);
+                    JOptionPane.showMessageDialog(dpf, "Sistem je zapamtio polaznika", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+
+                    dpf.dispose();
+                    
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(dpf, "Greska", "Greska", JOptionPane.ERROR_MESSAGE);
+                    ex.printStackTrace();
+                }
+                
+            }
+        });
   
     }    
 
-    public void otvoriFormu() {
-        pripremiFormu();
+    public void otvoriFormu(FormaModPolaznikEnum mod) {
+        pripremiFormu(mod);
         dpf.setVisible(true);
-        JOptionPane.showMessageDialog(dpf, "Sistem je kreirao polaznika", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+        if (mod==FormaModPolaznikEnum.DODAJ) {
+            JOptionPane.showMessageDialog(dpf, "Sistem je kreirao polaznika", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+        }
 
     }
 
-    public void pripremiFormu() {
+    public void pripremiFormu(FormaModPolaznikEnum mod) {
         dpf.getjComboBoxKategorija().removeAllItems();
         List<Kategorija> kategorije = Komunikacija.getInstance().ucitajKategorije();
         for (Kategorija k : kategorije) {
             dpf.getjComboBoxKategorija().addItem(k);
         }
+        if (mod==FormaModPolaznikEnum.DODAJ) {
+            dpf.getjButtonDodaj().setVisible(true);
+            dpf.getjButtonIzmeni().setVisible(false);
+            dpf.getjTextFieldID().setVisible(false);
+            dpf.getjLabelID().setVisible(false);
+        }else {
+            dpf.getjButtonDodaj().setVisible(false);
+            dpf.getjButtonIzmeni().setVisible(true);
+            dpf.getjTextFieldID().setVisible(true);
+            dpf.getjTextFieldID().setEnabled(false);
+            dpf.getjLabelID().setVisible(true);
+            
+            Polaznik p = (Polaznik) Koordinator.getInstance().vratiParam("polaznik");
+            dpf.getjTextFieldIP().setText(p.getImePrezimePolaznika());
+            dpf.getjTextFieldJMBG().setText(p.getJmbgPolaznika());
+            dpf.getjTextFieldDate().setText(p.getDatumrodjenjaPolaznika().toString());
+            dpf.getjComboBoxKategorija().setSelectedItem(p.getKategorija());
+            dpf.getjTextFieldID().setText(p.getIdPolaznik().toString());
+        }
+        
+        
     }
     
 }
