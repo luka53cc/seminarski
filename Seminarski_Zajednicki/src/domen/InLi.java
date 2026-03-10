@@ -128,8 +128,8 @@ public class InLi implements ApstraktniDomenskiObjekat{
     public List<ApstraktniDomenskiObjekat> vratiListuIzRs(ResultSet rs) throws Exception {
         List<ApstraktniDomenskiObjekat> lista=new ArrayList<>();
         while (rs.next()) {            
-            Long idI=rs.getLong("inli.idInstruktor");
-            Long idL=rs.getLong("inli.idLicenca");
+            int idI=rs.getInt("inli.idInstruktor");
+            int idL=rs.getInt("inli.idLicenca");
             Date datum=rs.getDate("inli.datumIzdavanja");
             Date datumEnd=rs.getDate("inli.datumIsteka");
             Instruktor i = new Instruktor(idI, null, null, null, null, null);

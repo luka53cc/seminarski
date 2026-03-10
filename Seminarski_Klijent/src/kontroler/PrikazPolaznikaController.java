@@ -139,6 +139,7 @@ public class PrikazPolaznikaController {
         pripremiFormu(); 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(ppf, "Greška pri osvežavanju: " + e.getMessage());
-    }    }
+    }    
+    }
     
 }

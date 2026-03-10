@@ -6,7 +6,6 @@ package komunikacija;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 
@@ -26,6 +25,7 @@ public class Primalac {
             ObjectInputStream ois=new ObjectInputStream(socket.getInputStream());
             return ois.readObject();
         } catch (IOException | ClassNotFoundException ex) {
+            System.out.println("Klijent je prekinuo vezu.");
             ex.printStackTrace();
         }
         return null;

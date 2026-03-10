@@ -8,6 +8,8 @@ import controller.Controller;
 import domen.Instruktor;
 import domen.Kategorija;
 import domen.Polaznik;
+import domen.StavkaZapisnika;
+import domen.Zapisnik;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
@@ -82,6 +84,16 @@ public class ObradaKlijentskihZahteva extends Thread{
                             odgovor.setOdgovor(e);
                         }
                         break;
+                    case UCITAJ_ZAPISNIKE:
+                        List<Zapisnik> zapisnici = Controller.getInstance().ucitajZapisnike();
+                        System.out.println("klasa OKZ:" + zapisnici);
+                        odgovor.setOdgovor(zapisnici);
+                        break;
+                    /*case UCITAJ_STAVKE:
+                        List<StavkaZapisnika> stavke = Controller.getInstance().ucitajStavke((int)zahtev.getParam());
+                        System.out.println("klasa OKZ:" + stavke);
+                        odgovor.setOdgovor(stavke);
+                        break;*/
                     default:
                         System.out.println("GRESKA, OPERACIJA NE POSTOJI");
                 }

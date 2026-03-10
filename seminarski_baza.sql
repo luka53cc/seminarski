@@ -125,9 +125,12 @@ CREATE TABLE `stavkazapisnika` (
   KEY `idUsluga` (`idUsluga`),
   CONSTRAINT `stavkazapisnika_ibfk_1` FOREIGN KEY (`idZapisnik`) REFERENCES `zapisnik` (`idZapisnik`),
   CONSTRAINT `stavkazapisnika_ibfk_2` FOREIGN KEY (`idUsluga`) REFERENCES `usluga` (`idUsluga`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `stavkazapisnika` */
+
+insert  into `stavkazapisnika`(`idZapisnik`,`rb`,`tekst`,`trajanjeStavke`,`idUsluga`) values 
+(1,1,'lala',20,1);
 
 /*Table structure for table `usluga` */
 
@@ -139,9 +142,12 @@ CREATE TABLE `usluga` (
   `trajanjeUsluge` int(11) NOT NULL,
   `cenaUsluge` double NOT NULL,
   PRIMARY KEY (`idUsluga`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `usluga` */
+
+insert  into `usluga`(`idUsluga`,`opisUsluge`,`trajanjeUsluge`,`cenaUsluge`) values 
+(1,'Hazmat',300,12000);
 
 /*Table structure for table `zapisnik` */
 
@@ -159,9 +165,12 @@ CREATE TABLE `zapisnik` (
   KEY `idPolaznik` (`idPolaznik`),
   CONSTRAINT `zapisnik_ibfk_1` FOREIGN KEY (`idInstruktor`) REFERENCES `instruktor` (`idInstruktor`),
   CONSTRAINT `zapisnik_ibfk_2` FOREIGN KEY (`idPolaznik`) REFERENCES `polaznik` (`idPolaznik`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `zapisnik` */
+
+insert  into `zapisnik`(`idZapisnik`,`datumEvidentiranja`,`tekst`,`ukupnoTrajanje`,`idInstruktor`,`idPolaznik`) values 
+(1,'2026-03-03','lalalala',50,1,5);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

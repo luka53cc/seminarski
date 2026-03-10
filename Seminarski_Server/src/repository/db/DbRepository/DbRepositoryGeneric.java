@@ -24,7 +24,6 @@ public class DbRepositoryGeneric implements DbRepository<ApstraktniDomenskiObjek
         String upit = "SELECT * FROM " + param.vratiNazivTabele();
         if (uslov !=null) {
             //valjda ovako
-            upit+=" WHERE ";
             upit+=uslov;
         }
         System.out.println(upit);

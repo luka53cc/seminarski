@@ -7,6 +7,8 @@ package komunikacija;
 import domen.Instruktor;
 import domen.Kategorija;
 import domen.Polaznik;
+import domen.StavkaZapisnika;
+import domen.Zapisnik;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -127,6 +129,30 @@ public class Komunikacija {
 
 
 
+    }
+
+    public List<Zapisnik> ucitajZapisnike() {
+        Zahtev z = new Zahtev(Operacije.UCITAJ_ZAPISNIKE, null);
+        List<Zapisnik> zapisnici = new ArrayList<>();
+        
+        posiljalac.posalji(z);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        zapisnici= (List<Zapisnik>) odg.getOdgovor();
+        
+        return zapisnici;
+    }
+
+    public List<StavkaZapisnika> ucitajStavke(int id) {
+        Zahtev z = new Zahtev(Operacije.UCITAJ_STAVKE, id);
+        List<StavkaZapisnika> stavke = new ArrayList<>();
+        
+        posiljalac.posalji(z);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        stavke= (List<StavkaZapisnika>) odg.getOdgovor();
+        
+        return stavke;
     }
     
     

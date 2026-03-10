@@ -4,7 +4,6 @@
  */
 package domen;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +14,14 @@ import java.util.Objects;
  * @author Luka
  */
 public class Kategorija implements ApstraktniDomenskiObjekat{
-    private Long idKategorija;
+    private int idKategorija;
     private String nazivKategorije;
     private String opisKategorije;
 
     public Kategorija() {
     }
 
-    public Kategorija(Long idKategorija, String nazivKategorije, String opisKategorije) {
+    public Kategorija(int idKategorija, String nazivKategorije, String opisKategorije) {
         this.idKategorija = idKategorija;
         this.nazivKategorije = nazivKategorije;
         this.opisKategorije = opisKategorije;
@@ -54,11 +53,11 @@ public class Kategorija implements ApstraktniDomenskiObjekat{
         return Objects.equals(this.idKategorija, other.idKategorija);
     }
 
-    public Long getIdKategorija() {
+    public int getIdKategorija() {
         return idKategorija;
     }
 
-    public void setIdKategorija(Long idKategorija) {
+    public void setIdKategorija(int idKategorija) {
         this.idKategorija = idKategorija;
     }
 
@@ -107,7 +106,7 @@ public class Kategorija implements ApstraktniDomenskiObjekat{
     public List<ApstraktniDomenskiObjekat> vratiListuIzRs(ResultSet rs) throws Exception {
         List<ApstraktniDomenskiObjekat> lista=new ArrayList<>();
         while (rs.next()) {            
-            Long id=rs.getLong("kategorija.idKategorija");
+            int id=rs.getInt("kategorija.idKategorija");
             String naziv=rs.getString("kategorija.nazivKategorije");
             String opis=rs.getString("kategorija.opisKategorije");
             

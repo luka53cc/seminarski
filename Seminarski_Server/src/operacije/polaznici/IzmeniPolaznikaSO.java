@@ -22,8 +22,7 @@ public class IzmeniPolaznikaSO extends ApstraktnaGenerickaOperacija{
         }
         Polaznik p = (Polaznik) objekat;
         if (p.getImePrezimePolaznika()==null || p.getImePrezimePolaznika().isBlank()
-                || p.getJmbgPolaznika()==null || p.getJmbgPolaznika().length()!=13
-                || p.getKategorija().getIdKategorija()==null || p.getKategorija().getIdKategorija()<0 ||p.getKategorija().getIdKategorija()>10||
+                || p.getJmbgPolaznika()==null || p.getJmbgPolaznika().length()!=13 ||
                 p.getDatumrodjenjaPolaznika().after(new Date())) {
             throw new Exception("Greska u vrednosti atributa");
         }

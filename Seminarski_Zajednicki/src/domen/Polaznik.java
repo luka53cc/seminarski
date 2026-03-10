@@ -17,7 +17,7 @@ import java.util.Objects;
  * @author Luka
  */
 public class Polaznik implements ApstraktniDomenskiObjekat{
-    private Long idPolaznik;
+    private int idPolaznik;
     private String imePrezimePolaznika;
     private String jmbgPolaznika;
     private Date datumrodjenjaPolaznika;
@@ -26,7 +26,7 @@ public class Polaznik implements ApstraktniDomenskiObjekat{
     public Polaznik() {
     }
 
-    public Polaznik(Long idPolaznik, String imePrezimePolaznika, String jmbgPolaznika, Date datumrodjenjaPolaznika, Kategorija kategorija) {
+    public Polaznik(int idPolaznik, String imePrezimePolaznika, String jmbgPolaznika, Date datumrodjenjaPolaznika, Kategorija kategorija) {
         this.idPolaznik = idPolaznik;
         this.imePrezimePolaznika = imePrezimePolaznika;
         this.jmbgPolaznika = jmbgPolaznika;
@@ -60,11 +60,11 @@ public class Polaznik implements ApstraktniDomenskiObjekat{
         return  imePrezimePolaznika;
     }
 
-    public Long getIdPolaznik() {
+    public int getIdPolaznik() {
         return idPolaznik;
     }
 
-    public void setIdPolaznik(Long idPolaznik) {
+    public void setIdPolaznik(int idPolaznik) {
         this.idPolaznik = idPolaznik;
     }
 
@@ -130,11 +130,11 @@ public class Polaznik implements ApstraktniDomenskiObjekat{
     public List<ApstraktniDomenskiObjekat> vratiListuIzRs(ResultSet rs) throws Exception {
         List<ApstraktniDomenskiObjekat> lista=new ArrayList<>();
         while (rs.next()) {            
-            Long id=rs.getLong("polaznik.idPolaznik");
+            int id=rs.getInt("polaznik.idPolaznik");
             Date datum=rs.getDate("polaznik.datumRodjenjaPolaznika");
             String imeP=rs.getString("polaznik.imePrezimePolaznika");
             String jmbg=rs.getString("polaznik.jmbgPolaznika");
-            Long idKat=rs.getLong("polaznik.idKategorija");
+            int idKat=rs.getInt("polaznik.idKategorija");
             Kategorija k = new Kategorija(idKat, null, null);
             Polaznik p = new Polaznik(id, imeP, jmbg, datum, k);
             lista.add(p);

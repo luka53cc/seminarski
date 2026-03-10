@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class StavkaZapisnika implements ApstraktniDomenskiObjekat{
     private Zapisnik zapisnik;
-    private Long rb;
+    private int rb;
     private String tekst;
     private int trajanjeStavke;
     private Usluga usluga;
@@ -25,7 +25,7 @@ public class StavkaZapisnika implements ApstraktniDomenskiObjekat{
     public StavkaZapisnika() {
     }
 
-    public StavkaZapisnika(Zapisnik zapisnik, Long rb, String tekst, int trajanjeStavke, Usluga usluga) {
+    public StavkaZapisnika(Zapisnik zapisnik, int rb, String tekst, int trajanjeStavke, Usluga usluga) {
         this.zapisnik = zapisnik;
         this.rb = rb;
         this.tekst = tekst;
@@ -41,7 +41,9 @@ public class StavkaZapisnika implements ApstraktniDomenskiObjekat{
     @Override
     public int hashCode() {
         int hash = 7;
-        return hash;
+        hash = 79 * hash + this.rb;
+        hash = 79 * hash + Objects.hashCode(this.zapisnik != null ? this.zapisnik.getIdZapisnik() : 0);
+        return hash;   
     }
 
     @Override
@@ -49,15 +51,30 @@ public class StavkaZapisnika implements ApstraktniDomenskiObjekat{
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
         final StavkaZapisnika other = (StavkaZapisnika) obj;
-        return Objects.equals(this.rb, other.rb);
+
+        // Provera rednog broja
+        if (this.rb != other.rb) {
+            return false;
+        }
+
+        // Provera da li su oba zapisnika null ili oba nisu null
+        if (this.zapisnik == null && other.zapisnik == null) {
+            return true;
+        }
+        if (this.zapisnik == null || other.zapisnik == null) {
+            return false;
+        }
+
+        // Provera ID-ja zapisnika (ovo je ključno!)
+        return Objects.equals(this.zapisnik.getIdZapisnik(), other.zapisnik.getIdZapisnik());
+        
     }
+
+  
 
     public Zapisnik getZapisnik() {
         return zapisnik;
@@ -67,11 +84,11 @@ public class StavkaZapisnika implements ApstraktniDomenskiObjekat{
         this.zapisnik = zapisnik;
     }
 
-    public Long getRb() {
+    public int getRb() {
         return rb;
     }
 
-    public void setRb(Long rb) {
+    public void setRb(int rb) {
         this.rb = rb;
     }
 
@@ -128,17 +145,28 @@ public class StavkaZapisnika implements ApstraktniDomenskiObjekat{
     public List<ApstraktniDomenskiObjekat> vratiListuIzRs(ResultSet rs) throws Exception {
         List<ApstraktniDomenskiObjekat> lista=new ArrayList<>();
         while (rs.next()) {            
-            Long idZ=rs.getLong("stavkazapisnika.idZapisnik");
-            Long rb=rs.getLong("stavkazapisnika.rb");
+            int idZ=rs.getInt("stavkazapisnika.idZapisnik");
+            int rb=rs.getInt("stavkazapisnika.rb");
             String tekst=rs.getString("stavkazapisnika.tekst");
             int trajanje=rs.getInt("stavkazapisnika.trajanjeStavke");
-            Long idU=rs.getLong("stavkazapisnika.idUsluga");
+            int idU=rs.getInt("stavkazapisnika.idUsluga");
             
             Zapisnik z = new Zapisnik(idZ, null, null, 0, null, null, null);
-            Usluga u = new Usluga(idU, null, 0, 0);
+            z.setDatumEvidentiranja(rs.getDate("zapisnik.datumEvidentiranja"));
+            z.setTekst(rs.getString("zapisnik.tekst"));
+            z.setUkupnoTrajanje(rs.getInt("zapisnik.ukupnoTrajanje"));
+            z.setInstruktor(new Instruktor(rs.getInt("zapisnik.instruktor"), null, null, null, null, null));
+            z.setPolaznik(new Polaznik(rs.getInt("zapisnik.polaznik"), null, null, null, null));
             
+            Usluga u = new Usluga(idU, null, 0, 0);
+            u.setOpisUsluge(rs.getString("usluga.opisUsluge"));
+            u.setTrajanjeUsluge(rs.getInt("usluga.trajanjeUsluge"));
+            u.setCenaUsluge(rs.getDouble("usluga.cenaUsluge"));
             StavkaZapisnika sz = new StavkaZapisnika(z, rb, tekst, trajanje, u);
             lista.add(sz);
+            
+            
+            
             //vrv ne valja
             
         }

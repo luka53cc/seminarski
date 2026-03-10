@@ -16,13 +16,13 @@ import java.util.Objects;
  * @author Luka
  */
 public class Licenca implements ApstraktniDomenskiObjekat{
-    private Long idLicenca;
+    private int idLicenca;
     private String nazivLicence;
 
     public Licenca() {
     }
 
-    public Licenca(Long idLicenca, String nazivLicence) {
+    public Licenca(int idLicenca, String nazivLicence) {
         this.idLicenca = idLicenca;
         this.nazivLicence = nazivLicence;
     }
@@ -56,11 +56,11 @@ public class Licenca implements ApstraktniDomenskiObjekat{
    
 
 
-    public Long getIdLicenca() {
+    public int getIdLicenca() {
         return idLicenca;
     }
 
-    public void setIdLicenca(Long idLicenca) {
+    public void setIdLicenca(int idLicenca) {
         this.idLicenca = idLicenca;
     }
 
@@ -101,7 +101,7 @@ public class Licenca implements ApstraktniDomenskiObjekat{
     public List<ApstraktniDomenskiObjekat> vratiListuIzRs(ResultSet rs) throws Exception {
         List<ApstraktniDomenskiObjekat> lista=new ArrayList<>();
         while (rs.next()) {            
-            Long id=rs.getLong("licenca.idLicenca");
+            int id=rs.getInt("licenca.idLicenca");
             String naziv=rs.getString("licenca.nazivLicence");
             
             Licenca l = new Licenca(id, naziv);

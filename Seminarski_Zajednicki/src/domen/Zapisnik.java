@@ -18,7 +18,7 @@ import java.util.Objects;
  */
 public class Zapisnik implements ApstraktniDomenskiObjekat{
     
-    private Long idZapisnik;
+    private int idZapisnik;
     private Date datumEvidentiranja;
     private String tekst;
     private int ukupnoTrajanje;
@@ -29,7 +29,7 @@ public class Zapisnik implements ApstraktniDomenskiObjekat{
     public Zapisnik() {
     }
 
-    public Zapisnik(Long idZapisnik, Date datumEvidentiranja, String tekst, int ukupnoTrajanje, Instruktor instruktor, Polaznik polaznik, List<StavkaZapisnika> stavkeZapisnika) {
+    public Zapisnik(int idZapisnik, Date datumEvidentiranja, String tekst, int ukupnoTrajanje, Instruktor instruktor, Polaznik polaznik, List<StavkaZapisnika> stavkeZapisnika) {
         this.idZapisnik = idZapisnik;
         this.datumEvidentiranja = datumEvidentiranja;
         this.tekst = tekst;
@@ -65,11 +65,11 @@ public class Zapisnik implements ApstraktniDomenskiObjekat{
         return Objects.equals(this.idZapisnik, other.idZapisnik);
     }
 
-    public Long getIdZapisnik() {
+    public int getIdZapisnik() {
         return idZapisnik;
     }
 
-    public void setIdZapisnik(Long idZapisnik) {
+    public void setIdZapisnik(int idZapisnik) {
         this.idZapisnik = idZapisnik;
     }
 
@@ -155,12 +155,12 @@ public class Zapisnik implements ApstraktniDomenskiObjekat{
     public List<ApstraktniDomenskiObjekat> vratiListuIzRs(ResultSet rs) throws Exception {
         List<ApstraktniDomenskiObjekat> lista=new ArrayList<>();
         while (rs.next()) {            
-            Long idZap=rs.getLong("zapisnik.idZapisnik");
+            int idZap=rs.getInt("zapisnik.idZapisnik");
             Date datum=rs.getDate("zapisnik.datumEvidentiranja");
             String tekst=rs.getString("zapisnik.tekst");
             int trajanje=rs.getInt("zapisnik.ukupnoTrajanje");
-            Long idIns=rs.getLong("zapisnik.idInstruktor");
-            Long idPol=rs.getLong("zapisnik.idPolaznik");
+            int idIns=rs.getInt("zapisnik.idInstruktor");
+            int idPol=rs.getInt("zapisnik.idPolaznik");
             
             Instruktor i = new Instruktor(idIns, null, null, null, null, null);
             Polaznik p = new Polaznik(idPol, null, null, null, null);

@@ -17,7 +17,7 @@ import java.util.Objects;
  * @author Luka
  */
 public class Instruktor implements ApstraktniDomenskiObjekat{
-    private Long idInstruktor;
+    private int idInstruktor;
     private String imePrezimeInstruktora;
     private String korisnickoIme;
     private String sifra;
@@ -48,6 +48,8 @@ public class Instruktor implements ApstraktniDomenskiObjekat{
         return Objects.equals(this.sifra, other.sifra);
     }
 
+
+
     @Override
     public String toString() {
         return "Ime prezime: " + imePrezimeInstruktora;
@@ -56,7 +58,7 @@ public class Instruktor implements ApstraktniDomenskiObjekat{
     public Instruktor() {
     }
 
-    public Instruktor(Long idInstruktor, String imePrezimeInstruktora, String korisnickoIme, String sifra, String brojTelefona, Date datumZaposlenja) {
+    public Instruktor(int idInstruktor, String imePrezimeInstruktora, String korisnickoIme, String sifra, String brojTelefona, Date datumZaposlenja) {
         this.idInstruktor = idInstruktor;
         this.imePrezimeInstruktora = imePrezimeInstruktora;
         this.korisnickoIme = korisnickoIme;
@@ -65,11 +67,11 @@ public class Instruktor implements ApstraktniDomenskiObjekat{
         this.datumZaposlenja = datumZaposlenja;
     }
 
-    public Long getIdInstruktor() {
+    public int getIdInstruktor() {
         return idInstruktor;
     }
 
-    public void setIdInstruktor(Long idInstruktor) {
+    public void setIdInstruktor(int idInstruktor) {
         this.idInstruktor = idInstruktor;
     }
 
@@ -142,7 +144,7 @@ public class Instruktor implements ApstraktniDomenskiObjekat{
     public List<ApstraktniDomenskiObjekat> vratiListuIzRs(ResultSet rs) throws Exception {
         List<ApstraktniDomenskiObjekat> lista=new ArrayList<>();
         while (rs.next()) {            
-            Long id=rs.getLong("instruktor.idInstruktor");
+            int id=rs.getInt("instruktor.idInstruktor");
             Date datum=rs.getDate("instruktor.datumZaposlenja");
             String imeP=rs.getString("instruktor.imePrezimeInstruktora");
             String korIme=rs.getString("instruktor.korisnickoIme");

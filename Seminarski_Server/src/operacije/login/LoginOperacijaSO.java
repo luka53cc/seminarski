@@ -24,7 +24,7 @@ public class LoginOperacijaSO extends ApstraktnaGenerickaOperacija{
     }
     @Override
     protected void izvrsiOperaciju(Object objekat, String kljuc) throws Exception {
-        List<Instruktor> sviInstruktori=broker.getAll((Instruktor)objekat, null);
+        List<Instruktor> sviInstruktori=broker.getAll(new Instruktor(), null);
         System.out.println("LoginOperacija" + sviInstruktori);
         for (Instruktor i : sviInstruktori) {
             if (i.equals((Instruktor)objekat)) {

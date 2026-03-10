@@ -44,7 +44,7 @@ public class DodajPolaznikaController {
                     Kategorija kat = (Kategorija) dpf.getjComboBoxKategorija().getSelectedItem();
                     Date datumRodjenja = Date.valueOf(datum);
                     
-                    Polaznik p =new Polaznik(Long.MIN_VALUE, imeP, jmbg, datumRodjenja, kat);
+                    Polaznik p =new Polaznik(0, imeP, jmbg, datumRodjenja, kat);
                     Komunikacija.getInstance().dodajPolaznika(p);
                     JOptionPane.showMessageDialog(dpf, "Sistem je zapamtio polaznika", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
 
@@ -69,7 +69,7 @@ public class DodajPolaznikaController {
                     String jmbg = dpf.getjTextFieldJMBG().getText().trim();
                     String datum = dpf.getjTextFieldDate().getText().trim();
                     Kategorija kat = (Kategorija) dpf.getjComboBoxKategorija().getSelectedItem();
-                    Long id = Long.valueOf(dpf.getjTextFieldID().getText().trim());
+                    int id = Integer.parseInt(dpf.getjTextFieldID().getText().trim());
                     Date datumRodjenja = Date.valueOf(datum);
                     
                     Polaznik p =new Polaznik(id, imeP, jmbg, datumRodjenja, kat);
@@ -120,7 +120,7 @@ public class DodajPolaznikaController {
             dpf.getjTextFieldJMBG().setText(p.getJmbgPolaznika());
             dpf.getjTextFieldDate().setText(p.getDatumrodjenjaPolaznika().toString());
             dpf.getjComboBoxKategorija().setSelectedItem(p.getKategorija());
-            dpf.getjTextFieldID().setText(p.getIdPolaznik().toString());
+            dpf.getjTextFieldID().setText(p.getIdPolaznik()+"");
         }
         
         

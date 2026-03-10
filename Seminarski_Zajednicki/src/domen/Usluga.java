@@ -16,7 +16,7 @@ import java.util.Objects;
  * @author Luka
  */
 public class Usluga implements ApstraktniDomenskiObjekat{
-    private Long idUsluga;
+    private int idUsluga;
     private String opisUsluge;
     private int trajanjeUsluge;
     private double cenaUsluge;
@@ -29,7 +29,7 @@ public class Usluga implements ApstraktniDomenskiObjekat{
         return "Usluga{" + "idUsluga=" + idUsluga + ", opisUsluge=" + opisUsluge + ", trajanjeUsluge=" + trajanjeUsluge + ", cenaUsluge=" + cenaUsluge + '}';
     }
 
-    public Usluga(Long idUsluga, String opisUsluge, int trajanjeUsluge, double cenaUsluge) {
+    public Usluga(int idUsluga, String opisUsluge, int trajanjeUsluge, double cenaUsluge) {
         this.idUsluga = idUsluga;
         this.opisUsluge = opisUsluge;
         this.trajanjeUsluge = trajanjeUsluge;
@@ -57,11 +57,11 @@ public class Usluga implements ApstraktniDomenskiObjekat{
         return Objects.equals(this.idUsluga, other.idUsluga);
     }
 
-    public Long getIdUsluga() {
+    public int getIdUsluga() {
         return idUsluga;
     }
 
-    public void setIdUsluga(Long idUsluga) {
+    public void setIdUsluga(int idUsluga) {
         this.idUsluga = idUsluga;
     }
 
@@ -118,10 +118,10 @@ public class Usluga implements ApstraktniDomenskiObjekat{
     public List<ApstraktniDomenskiObjekat> vratiListuIzRs(ResultSet rs) throws Exception {
         List<ApstraktniDomenskiObjekat> lista=new ArrayList<>();
         while (rs.next()) {            
-            Long id=rs.getLong("usluga.idUsluga");
+            int id=rs.getInt("usluga.idUsluga");
             String opis=rs.getString("usluga.opisUsluge");
             int trajanje=rs.getInt("usluga.trajanjeUsluge");
-            double cena=rs.getLong("usluga.cenaUsluge");
+            double cena=rs.getDouble("usluga.cenaUsluge");
             
             Usluga u = new Usluga(id, opis, trajanje, cena);
             lista.add(u);

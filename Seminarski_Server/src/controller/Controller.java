@@ -7,6 +7,8 @@ package controller;
 import domen.Instruktor;
 import domen.Kategorija;
 import domen.Polaznik;
+import domen.StavkaZapisnika;
+import domen.Zapisnik;
 import java.util.List;
 import operacije.kategorije.UcitajKategorijeSO;
 import operacije.login.LoginOperacijaSO;
@@ -14,6 +16,8 @@ import operacije.polaznici.IzmeniPolaznikaSO;
 import operacije.polaznici.KreirajPolaznikaSO;
 import operacije.polaznici.ObrisiPolaznikaSO;
 import operacije.polaznici.UcitajPolaznikeSO;
+import operacije.zapisnici.UcitajStavkeZapisnikaSO;
+import operacije.zapisnici.UcitajZapisnikeSO;
 
 /**
  *
@@ -74,4 +78,24 @@ public class Controller {
         operacija.izvrsi(p, null);
 
     }
+
+    public List<Zapisnik> ucitajZapisnike() throws Exception {
+        UcitajZapisnikeSO operacija = new UcitajZapisnikeSO();
+        operacija.izvrsi(null, null);
+        System.out.println("klasa Controller: "+operacija.getZapisnici());
+
+        return operacija.getZapisnici();
+     
+    }
+
+    public List<StavkaZapisnika> ucitajStavke(int id) throws Exception {
+        UcitajStavkeZapisnikaSO operacija = new UcitajStavkeZapisnikaSO();
+        operacija.izvrsi(id, null);
+        System.out.println("klasa Controller: "+operacija.getStavke());
+
+        return operacija.getStavke();
+     
+    }
+
+
 }

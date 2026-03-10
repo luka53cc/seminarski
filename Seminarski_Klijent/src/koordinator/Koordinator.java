@@ -9,12 +9,14 @@ import forme.DodajPolaznikaForma;
 import forme.GlavnaForma;
 import forme.LoginForma;
 import forme.PrikazPolaznikaForma;
+import forme.PrikazZapisnikaForma;
 import java.util.HashMap;
 import java.util.Map;
 import kontroler.DodajPolaznikaController;
 import kontroler.GlavnaFormaController;
 import kontroler.LoginController;
 import kontroler.PrikazPolaznikaController;
+import kontroler.PrikazZapisnikaController;
 import modovi.FormaModPolaznikEnum;
 
 /**
@@ -28,6 +30,8 @@ public class Koordinator {
     private GlavnaFormaController glavnaFormaController;
     private PrikazPolaznikaController ppController;
     private DodajPolaznikaController dpController;
+    private PrikazZapisnikaController pzController;
+    
     
     private Map<String, Object> parametri;
     
@@ -59,6 +63,11 @@ public class Koordinator {
     public void otvoriDodajPacijentaFormu() {
         dpController = new DodajPolaznikaController(new DodajPolaznikaForma());
         dpController.otvoriFormu(FormaModPolaznikEnum.DODAJ);
+    }
+    public void otvoriPrikazZapisnikaFormu() {
+        pzController = new PrikazZapisnikaController(new PrikazZapisnikaForma());
+        pzController.otvoriFormu();
+        
     }
 
 

@@ -3,13 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/koordinator/Koordinator.java</file>
+            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/forme/PrikazZapisnikaForma.java</file>
+            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/kontroler/GlavnaFormaController.java</file>
             <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/modovi/FormaModPolaznikEnum.java</file>
+            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/kontroler/LoginController.java</file>
+            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/forme/GlavnaForma.java</file>
+            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/komunikacija/Komunikacija.java</file>
+            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/kontroler/PrikazPolaznikaController.java</file>
+            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/kontroler/PrikazZapisnikaController.java</file>
+            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/koordinator/Koordinator.java</file>
             <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/kontroler/DodajPolaznikaController.java</file>
             <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/forme/PrikazPolaznikaForma.java</file>
-            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/komunikacija/Komunikacija.java</file>
+            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/forme/model/ModelTabeleZapisnici.java</file>
+            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/forme/model/ModelTabeleStavkaZapisnika.java</file>
+            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/forme/LoginForma.java</file>
             <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/forme/model/ModelTabelePolaznik.java</file>
-            <file>file:/C:/PS_K1/seminarski/Seminarski_Klijent/src/kontroler/PrikazPolaznikaController.java</file>
         </group>
     </open-files>
 </project-private>
