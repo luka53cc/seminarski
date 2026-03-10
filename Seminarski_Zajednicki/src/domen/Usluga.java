@@ -4,8 +4,7 @@
  */
 package domen;
 
-import java.io.Serializable;
-import java.sql.Date;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;

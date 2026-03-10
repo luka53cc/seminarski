@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package niti;
 
 import controller.Controller;
@@ -17,36 +13,40 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import komunikacija.*;
 
-
 /**
  *
  * @author Luka
  */
-public class ObradaKlijentskihZahteva extends Thread{
+public class ObradaKlijentskihZahteva extends Thread {
     Socket socket;
     Posiljalac posiljalac;
     Primalac primalac;
-    boolean kraj=false;
+    boolean kraj = false;
+
     public ObradaKlijentskihZahteva(Socket socket) {
-        this.socket=socket;
+        this.socket = socket;
         posiljalac = new Posiljalac(socket);
-        primalac= new Primalac(socket);
+        primalac = new Primalac(socket);
     }
-    
-    
-    
+
     @Override
     public void run() {
-        while (!kraj) {            
+        while (!kraj) {
             try {
                 Zahtev zahtev = (Zahtev) primalac.primi();
-                Odgovor odgovor = new Odgovor();
                 
+                // Ako primalac vrati null, klijent je prekinuo vezu
+                if (zahtev == null) {
+                    //System.out.println("Klijent je prekinuo vezu.");
+                    break; 
+                }
+
+                Odgovor odgovor = new Odgovor();
+
                 switch (zahtev.getOperacija()) {
                     case LOGIN:
                         Instruktor i = (Instruktor) zahtev.getParam();
-                        // moze i sa novim ovim instruktorom
-                        i =Controller.getInstance().login(i);
+                        i = Controller.getInstance().login(i);
                         odgovor.setOdgovor(i);
                         break;
                     case UCITAJ_POLAZNIKE:
@@ -86,32 +86,34 @@ public class ObradaKlijentskihZahteva extends Thread{
                         break;
                     case UCITAJ_ZAPISNIKE:
                         List<Zapisnik> zapisnici = Controller.getInstance().ucitajZapisnike();
-                        System.out.println("klasa OKZ:" + zapisnici);
                         odgovor.setOdgovor(zapisnici);
                         break;
-                    /*case UCITAJ_STAVKE:
-                        List<StavkaZapisnika> stavke = Controller.getInstance().ucitajStavke((int)zahtev.getParam());
-                        System.out.println("klasa OKZ:" + stavke);
+                    case UCITAJ_STAVKE:
+                        List<StavkaZapisnika> stavke = Controller.getInstance().ucitajStavke((int) zahtev.getParam());
                         odgovor.setOdgovor(stavke);
-                        break;*/
+                        break;
                     default:
                         System.out.println("GRESKA, OPERACIJA NE POSTOJI");
                 }
                 posiljalac.posalji(odgovor);
+                
             } catch (Exception ex) {
-                Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Nit za klijenta se gasi zbog greske: " + ex.getMessage());
+                break; 
             }
         }
+        
+        prekiniNit();
     }
-    public void prekiniNit(){
-        kraj=true;
+
+    public void prekiniNit() {
+        kraj = true;
         try {
-            socket.close();
+            if (socket != null && !socket.isClosed()) {
+                socket.close();
+            }
         } catch (IOException ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
         }
-        interrupt();
     }
-    
-    
 }

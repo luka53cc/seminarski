@@ -20,7 +20,8 @@ public class UcitajPolaznikeSO extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat, String kljuc) throws Exception {
-        polaznici = broker.getAll(new Polaznik(), null);
+        String ostatak = " JOIN kategorija ON polaznik.idKategorija=kategorija.idKategorija ";
+        polaznici = broker.getAll(new Polaznik(), ostatak);
     }
 
     public List<Polaznik> getPolaznici() {

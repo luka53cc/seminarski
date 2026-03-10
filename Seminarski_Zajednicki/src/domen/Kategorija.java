@@ -34,23 +34,15 @@ public class Kategorija implements ApstraktniDomenskiObjekat{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        return hash;
+        return Objects.hash(idKategorija);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Kategorija other = (Kategorija) obj;
-        return Objects.equals(this.idKategorija, other.idKategorija);
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Kategorija other = (Kategorija) obj;
+        return this.idKategorija == other.idKategorija;
     }
 
     public int getIdKategorija() {

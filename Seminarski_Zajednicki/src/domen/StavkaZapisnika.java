@@ -155,8 +155,8 @@ public class StavkaZapisnika implements ApstraktniDomenskiObjekat{
             z.setDatumEvidentiranja(rs.getDate("zapisnik.datumEvidentiranja"));
             z.setTekst(rs.getString("zapisnik.tekst"));
             z.setUkupnoTrajanje(rs.getInt("zapisnik.ukupnoTrajanje"));
-            z.setInstruktor(new Instruktor(rs.getInt("zapisnik.instruktor"), null, null, null, null, null));
-            z.setPolaznik(new Polaznik(rs.getInt("zapisnik.polaznik"), null, null, null, null));
+            z.setInstruktor(new Instruktor(rs.getInt("zapisnik.idInstruktor"), null, null, null, null, null));
+            z.setPolaznik(new Polaznik(rs.getInt("zapisnik.idPolaznik"), null, null, null, null));
             
             Usluga u = new Usluga(idU, null, 0, 0);
             u.setOpisUsluge(rs.getString("usluga.opisUsluge"));

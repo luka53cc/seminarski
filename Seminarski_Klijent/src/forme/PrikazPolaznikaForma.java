@@ -201,7 +201,7 @@ public class PrikazPolaznikaForma extends javax.swing.JFrame {
         jButtonPretrazi.addActionListener(actionListener);
     }
     public void addbtnResetujActionListener(ActionListener actionListener) {
-        jButtonPretrazi.addActionListener(actionListener);
+        jButtonResetuj.addActionListener(actionListener);
     }
 
 

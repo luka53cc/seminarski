@@ -92,14 +92,14 @@ public class Koordinator {
         return parametri.get(s);
     }
 
-    public void otvoriIzmeniPacijentaFormu() {
+    public void otvoriIzmeniPolaznikaFormu() {
         dpController = new DodajPolaznikaController(new DodajPolaznikaForma());
         dpController.otvoriFormu(FormaModPolaznikEnum.IZMENI);
         
     }
 
     public void osveziFormu() {
-        ppController.osveziFormu();
+        ppController.pripremiFormu();
     }
     
     

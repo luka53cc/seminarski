@@ -68,7 +68,7 @@ public class PrikazPolaznikaController {
                     Polaznik p = mtp.getLista().get(red);
                     
                     Koordinator.getInstance().dodajParam("polaznik", p);
-                    Koordinator.getInstance().otvoriIzmeniPacijentaFormu();
+                    Koordinator.getInstance().otvoriIzmeniPolaznikaFormu();
                     
                     
                 }
@@ -77,41 +77,37 @@ public class PrikazPolaznikaController {
         ppf.addbtnPretraziActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 String imeP = ppf.getjTextFieldIP().getText().trim();
                 String jmbg = ppf.getjTextFieldJMBG().getText().trim();
                 String datumStr = ppf.getjTextFieldDate().getText().trim();
                 Kategorija kat = (Kategorija) ppf.getjComboBoxKategorija().getSelectedItem();
 
-                java.sql.Date datumRodjenja = null;
+                Date datumRodjenja = null;
 
-                try {
-                    if (!datumStr.isEmpty()) {
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-                        java.util.Date utilDate = sdf.parse(datumStr);
-
-                        // Konverzija u java.sql.Date za bazu
-                        datumRodjenja = new java.sql.Date(utilDate.getTime());
+                if (!datumStr.isEmpty()) {
+                    try {
+                        datumRodjenja = Date.valueOf(datumStr);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(ppf,
+                                "Datum mora biti u formatu yyyy-MM-dd",
+                                "Greška",
+                                JOptionPane.ERROR_MESSAGE);
+                        return;
                     }
-
-                    ModelTabelePolaznik mtp = (ModelTabelePolaznik) ppf.getjTablePolaznici().getModel();
-
-                    mtp.pretrazi(imeP, jmbg, kat, datumRodjenja);
-
-                } catch (ParseException ex) {
-                    // Ako korisnik unese loš format datuma
-                    JOptionPane.showMessageDialog(ppf, "Unesite datum u formatu dd.MM.yyyy");
-                } catch (Exception ex) {
-                    // Hvatanje ostalih grešaka (npr. ClassCastException za tabelu)
-                    ex.printStackTrace();
                 }
-                    
-                
+
+                ModelTabelePolaznik mtp =
+                        (ModelTabelePolaznik) ppf.getjTablePolaznici().getModel();
+
+                mtp.pretrazi(imeP, jmbg, datumRodjenja, kat);
+
             }
         });
         ppf.addbtnResetujActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                osveziFormu();
+                pripremiFormu();
             }
         });
   
@@ -125,21 +121,17 @@ public class PrikazPolaznikaController {
     public void pripremiFormu() {
         ppf.getjComboBoxKategorija().removeAllItems();
         List<Kategorija> kategorije = Komunikacija.getInstance().ucitajKategorije();
+        Kategorija sve = new Kategorija(0, "sve kategorije",null);
+        ppf.getjComboBoxKategorija().addItem(sve);
         for (Kategorija k : kategorije) {
             ppf.getjComboBoxKategorija().addItem(k);
         }
+        ppf.getjComboBoxKategorija().setSelectedIndex(0);
 
         List<Polaznik> polaznici = Komunikacija.getInstance().ucitajPolaznike();
         ModelTabelePolaznik mtp = new ModelTabelePolaznik(polaznici);
         ppf.getjTablePolaznici().setModel(mtp);
     }
 
-    public void osveziFormu() {
-    try {
-        pripremiFormu(); 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(ppf, "Greška pri osvežavanju: " + e.getMessage());
-    }    
-    }
     
 }

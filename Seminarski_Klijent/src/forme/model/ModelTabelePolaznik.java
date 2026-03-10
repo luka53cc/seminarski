@@ -8,6 +8,7 @@ import domen.Kategorija;
 import domen.Polaznik;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.table.AbstractTableModel;
@@ -17,12 +18,13 @@ import javax.swing.table.AbstractTableModel;
  * @author Luka
  */
 public class ModelTabelePolaznik extends AbstractTableModel {
-
+private List<Polaznik> sviPolaznici; // Ovo je originalna lista iz baze
     List<Polaznik> lista;
     String[] kolone ={"id","Ime i prezime","JMBG","Datum rodjenja","Kategorija"};
 
     public ModelTabelePolaznik(List<Polaznik> lista) {
         this.lista = lista;
+        this.sviPolaznici = new ArrayList<>(lista); // Kopija za resetovanje
     }
     
     
@@ -71,14 +73,19 @@ public class ModelTabelePolaznik extends AbstractTableModel {
         return kolone[column];
     }
 
-    public void pretrazi(String imeP, String jmbg, Kategorija kat, Date datumRodjenja) {
-        List<Polaznik> filteredList = lista.stream()
-                .filter(p -> (datumRodjenja == null || p.getDatumrodjenjaPolaznika().equals(datumRodjenja)))
-                .filter(p-> (imeP == null || imeP.isBlank() || p.getImePrezimePolaznika().toLowerCase().contains(imeP.toLowerCase())))
-                .filter(p -> (jmbg == null || jmbg.isBlank() || p.getJmbgPolaznika().contains(jmbg)))
-                .filter(p -> (kat==null || kat.getIdKategorija()==0 || p.getKategorija().equals(kat)))
+    public void pretrazi(String imeP, String jmbg, Date datumRodjenja, Kategorija kat) {
+        this.lista = sviPolaznici.stream()
+                // filtriraj po datumu
+                .filter(p -> datumRodjenja == null || p.getDatumrodjenjaPolaznika().equals(datumRodjenja))
+                // filtriraj po imenu
+                .filter(p -> imeP == null || imeP.isBlank() || p.getImePrezimePolaznika().toLowerCase().contains(imeP.toLowerCase()))
+                // filtriraj po jmbg
+                .filter(p -> jmbg == null || jmbg.isBlank() || p.getJmbgPolaznika().contains(jmbg))
+                // filtriraj po kategoriji po ID-u
+                .filter(p -> kat == null || kat.getIdKategorija() == 0 || 
+                             (p.getKategorija() != null && p.getKategorija().getIdKategorija() == kat.getIdKategorija()))
                 .collect(Collectors.toList());
-        this.lista = filteredList;
+
         fireTableDataChanged();
     }
     

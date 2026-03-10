@@ -136,6 +136,10 @@ public class Polaznik implements ApstraktniDomenskiObjekat{
             String jmbg=rs.getString("polaznik.jmbgPolaznika");
             int idKat=rs.getInt("polaznik.idKategorija");
             Kategorija k = new Kategorija(idKat, null, null);
+            k.setNazivKategorije(rs.getString("kategorija.nazivKategorije"));
+            k.setOpisKategorije(rs.getString("kategorija.opisKategorije"));
+            
+            
             Polaznik p = new Polaznik(id, imeP, jmbg, datum, k);
             lista.add(p);
             
