@@ -4,6 +4,7 @@
  */
 package forme;
 
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -31,9 +32,9 @@ public class PrikazZapisnikaForma extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldIP = new javax.swing.JTextField();
+        jTextFieldTekst = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldJMBG = new javax.swing.JTextField();
+        jTextFieldTrajanje = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableZapisnici = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
@@ -50,9 +51,15 @@ public class PrikazZapisnikaForma extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Ime i prezime:");
+        jLabel1.setText("tekst:");
 
-        jLabel3.setText("JMBG:");
+        jTextFieldTekst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTekstActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Trajanje:");
 
         jTableZapisnici.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,7 +116,7 @@ public class PrikazZapisnikaForma extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldIP, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldTekst, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel3))
                             .addGroup(layout.createSequentialGroup()
@@ -117,8 +124,8 @@ public class PrikazZapisnikaForma extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextFieldDate)))
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldJMBG, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 87, Short.MAX_VALUE))
+                        .addComponent(jTextFieldTrajanje, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 152, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,10 +150,10 @@ public class PrikazZapisnikaForma extends javax.swing.JFrame {
                         .addComponent(jButtonResetuj))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldTekst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
-                            .addComponent(jTextFieldJMBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldTrajanje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -166,7 +173,7 @@ public class PrikazZapisnikaForma extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonObrisiStavku)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonIzmeniStavku)
@@ -178,6 +185,47 @@ public class PrikazZapisnikaForma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextFieldTekstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTekstActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTekstActionPerformed
+
+    // ove basic
+    
+    public void addbtnObrisiActionListener(ActionListener actionListener) {
+        jButtonObrisi.addActionListener(actionListener);
+    }
+    public void addbtnIzmeniActionListener(ActionListener actionListener) {
+        jButtonIzmeni.addActionListener(actionListener);
+    }
+    /*public void addbtnDodajActionListener(ActionListener actionListener) {
+        jButtonDodaj.addActionListener(actionListener);
+    }*/
+    
+    public void addbtnPretraziActionListener(ActionListener actionListener) {
+        jButtonPretrazi.addActionListener(actionListener);
+    }
+    public void addbtnResetujActionListener(ActionListener actionListener) {
+        jButtonResetuj.addActionListener(actionListener);
+    }
+    
+    
+    // stavkkeee
+    
+    public void addbtnObrisiStavkuActionListener(ActionListener actionListener) {
+        jButtonObrisiStavku.addActionListener(actionListener);
+    }
+    public void addbtnIzmeniStavkuActionListener(ActionListener actionListener) {
+        jButtonIzmeniStavku.addActionListener(actionListener);
+    }
+    public void addbtnDodajStavkuActionListener(ActionListener actionListener) {
+        jButtonDodajStavku.addActionListener(actionListener);
+    }
+    
+    
+    
+    
+    
+    
     public JButton getjButtonIzmeni() {
         return jButtonIzmeni;
     }
@@ -202,13 +250,14 @@ public class PrikazZapisnikaForma extends javax.swing.JFrame {
         return jTextFieldDate;
     }
 
-    public JTextField getjTextFieldIP() {
-        return jTextFieldIP;
+    public JTextField getjTextFieldTekst() {
+        return jTextFieldTekst;
     }
 
-    public JTextField getjTextFieldJMBG() {
-        return jTextFieldJMBG;
+    public JTextField getjTextFieldTrajanje() {
+        return jTextFieldTrajanje;
     }
+
 
     public JTable getjTableStavke() {
         return jTableStavke;
@@ -230,7 +279,7 @@ public class PrikazZapisnikaForma extends javax.swing.JFrame {
     private javax.swing.JTable jTableStavke;
     private javax.swing.JTable jTableZapisnici;
     private javax.swing.JTextField jTextFieldDate;
-    private javax.swing.JTextField jTextFieldIP;
-    private javax.swing.JTextField jTextFieldJMBG;
+    private javax.swing.JTextField jTextFieldTekst;
+    private javax.swing.JTextField jTextFieldTrajanje;
     // End of variables declaration//GEN-END:variables
 }

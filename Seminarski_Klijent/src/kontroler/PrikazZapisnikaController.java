@@ -9,14 +9,19 @@ import domen.Polaznik;
 import domen.StavkaZapisnika;
 import domen.Zapisnik;
 import forme.PrikazZapisnikaForma;
+import forme.model.ModelTabelePolaznik;
 import forme.model.ModelTabeleStavkaZapisnika;
 import forme.model.ModelTabeleZapisnici;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
+import koordinator.Koordinator;
 
 /**
  *
@@ -32,6 +37,142 @@ public class PrikazZapisnikaController {
     }
 
     private void addAtionListener() {
+        pzf.addbtnObrisiActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int red = pzf.getjTableZapisnici().getSelectedRow();
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(pzf, "Sistem ne moze da nadje zapisnik", "Greska", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(pzf, "Sistem je nasao zapisnik", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                    ModelTabeleZapisnici mtp = (ModelTabeleZapisnici) pzf.getjTableZapisnici().getModel();
+                    Zapisnik p = mtp.getLista().get(red);
+                    try {
+                        Komunikacija.getInstance().obrisiZapisnik(p);
+                        JOptionPane.showMessageDialog(pzf, "Sistem je obrisao zapisnik", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                        pripremiFormu();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(pzf, "Sistem ne moze da obrise zapisnik", "Greska", JOptionPane.ERROR_MESSAGE);
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        pzf.addbtnIzmeniActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int red = pzf.getjTableZapisnici().getSelectedRow();
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(pzf, "Sistem ne moze da nadje polaznika", "Greska", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    //JOptionPane.showMessageDialog(ppf, "Sistem je nasao zapisnik", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                    ModelTabeleZapisnici mtp = (ModelTabeleZapisnici) pzf.getjTableZapisnici().getModel();
+                    Zapisnik p = mtp.getLista().get(red);
+
+                    Koordinator.getInstance().dodajParam("zapisnik", p);
+                    Koordinator.getInstance().otvoriIzmeniZapisnikFormu();
+
+                }
+            }
+        });
+        pzf.addbtnPretraziActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String tekst = pzf.getjTextFieldTekst().getText().trim();
+                int trajanje =0;
+                try {
+                    trajanje = Integer.parseInt(pzf.getjTextFieldTrajanje().getText().trim());
+                } catch (Exception ex) {
+                }
+                String datumStr = pzf.getjTextFieldDate().getText().trim();
+                
+                Date datumEvidentiranja = null;
+
+                if (!datumStr.isEmpty()) {
+                    try {
+                        datumEvidentiranja = Date.valueOf(datumStr);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(pzf,
+                                "Datum mora biti u formatu yyyy-MM-dd",
+                                "Greška",
+                                JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+
+                ModelTabeleZapisnici mtp= (ModelTabeleZapisnici) pzf.getjTableZapisnici().getModel();
+
+                mtp.pretrazi(tekst, trajanje, datumEvidentiranja);
+
+            }
+        });
+        pzf.addbtnResetujActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pzf.getjTextFieldDate().setText("");
+                pzf.getjTextFieldTekst().setText("");
+                pzf.getjTextFieldTrajanje().setText("");
+                pripremiFormu();
+            }
+        });
+        
+        
+        //stavkee
+        
+        
+        
+        pzf.addbtnObrisiStavkuActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int red = pzf.getjTableStavke().getSelectedRow();
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(pzf, "Sistem ne moze da nadje stavku", "Greska", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(pzf, "Sistem je nasao stavku", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                    ModelTabeleStavkaZapisnika mtp = (ModelTabeleStavkaZapisnika) pzf.getjTableZapisnici().getModel();
+                    StavkaZapisnika p = mtp.getLista().get(red);
+                    try {
+                        Komunikacija.getInstance().obrisiStavkuZapisnika(p);
+                        JOptionPane.showMessageDialog(pzf, "Sistem je obrisao stavku", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                        pripremiFormu();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(pzf, "Sistem ne moze da obrise stavku", "Greska", JOptionPane.ERROR_MESSAGE);
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        pzf.addbtnIzmeniStavkuActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int red = pzf.getjTableStavke().getSelectedRow();
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(pzf, "Sistem ne moze da nadje stavku", "Greska", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    ModelTabeleStavkaZapisnika mtp = (ModelTabeleStavkaZapisnika) pzf.getjTableStavke().getModel();
+                    StavkaZapisnika p = mtp.getLista().get(red);
+
+                    Koordinator.getInstance().dodajParam("stavkazapisnika", p);
+                    Koordinator.getInstance().otvoriIzmeniStavkuFormu();
+
+                }
+            }
+        });
+        pzf.addbtnDodajStavkuActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Koordinator.getInstance().otvoriDodajStavkuFormu();
+            }
+        });
+        
+        
+        
+        
+        
+        
         
     }
     private void addMouseListener() {
@@ -45,6 +186,7 @@ public class PrikazZapisnikaController {
                     List<StavkaZapisnika> stavke = Komunikacija.getInstance().ucitajStavke(z.getIdZapisnik());
                     ModelTabeleStavkaZapisnika mtsz=new ModelTabeleStavkaZapisnika(stavke);
                     pzf.getjTableStavke().setModel(mtsz);
+                    Koordinator.getInstance().setSelektovan(z);
                 }
             }
         });

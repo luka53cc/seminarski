@@ -33,6 +33,9 @@ CREATE TABLE `inli` (
 
 /*Data for the table `inli` */
 
+insert  into `inli`(`idInstruktor`,`idLicenca`,`datumIzdavanja`,`datumIsteka`) values 
+(1,1,'2026-03-10','2031-03-10');
+
 /*Table structure for table `instruktor` */
 
 DROP TABLE IF EXISTS `instruktor`;
@@ -78,9 +81,14 @@ CREATE TABLE `licenca` (
   `idLicenca` bigint(20) NOT NULL AUTO_INCREMENT,
   `nazivLicence` varchar(50) NOT NULL,
   PRIMARY KEY (`idLicenca`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `licenca` */
+
+insert  into `licenca`(`idLicenca`,`nazivLicence`) values 
+(1,'Hazmat'),
+(2,'Defib'),
+(3,'SSWF');
 
 /*Table structure for table `polaznik` */
 
@@ -105,9 +113,8 @@ insert  into `polaznik`(`idPolaznik`,`imePrezimePolaznika`,`jmbgPolaznika`,`datu
 (6,'Marko Sokolovic','2010003710156','2003-01-20',3),
 (10,'Barbara Bobak','0707004715014','2004-07-07',1),
 (19,'Barbara Bobak','0707004715014','2004-07-07',1),
-(20,'gggfds','0202005710040','2005-02-02',1),
 (21,'Luka Spanovic','0202005710040','2005-02-02',1),
-(22,'Luakaa','0202005710040','2005-02-02',1),
+(22,'Luak','0202005710040','2005-02-07',2),
 (23,'kjhgfd','0202005710040','2005-02-02',1);
 
 /*Table structure for table `stavkazapisnika` */
@@ -125,12 +132,13 @@ CREATE TABLE `stavkazapisnika` (
   KEY `idUsluga` (`idUsluga`),
   CONSTRAINT `stavkazapisnika_ibfk_1` FOREIGN KEY (`idZapisnik`) REFERENCES `zapisnik` (`idZapisnik`),
   CONSTRAINT `stavkazapisnika_ibfk_2` FOREIGN KEY (`idUsluga`) REFERENCES `usluga` (`idUsluga`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `stavkazapisnika` */
 
 insert  into `stavkazapisnika`(`idZapisnik`,`rb`,`tekst`,`trajanjeStavke`,`idUsluga`) values 
-(1,1,'lala',20,1);
+(1,1,'lala',20,1),
+(2,2,'gggggg',35,1);
 
 /*Table structure for table `usluga` */
 
@@ -165,12 +173,13 @@ CREATE TABLE `zapisnik` (
   KEY `idPolaznik` (`idPolaznik`),
   CONSTRAINT `zapisnik_ibfk_1` FOREIGN KEY (`idInstruktor`) REFERENCES `instruktor` (`idInstruktor`),
   CONSTRAINT `zapisnik_ibfk_2` FOREIGN KEY (`idPolaznik`) REFERENCES `polaznik` (`idPolaznik`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `zapisnik` */
 
 insert  into `zapisnik`(`idZapisnik`,`datumEvidentiranja`,`tekst`,`ukupnoTrajanje`,`idInstruktor`,`idPolaznik`) values 
-(1,'2026-03-03','lalalala',50,1,5);
+(1,'2026-03-03','lalalala',50,1,5),
+(2,'2023-02-02','hhhhhhh',40,1,21);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

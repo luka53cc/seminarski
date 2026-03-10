@@ -5,8 +5,10 @@
 package forme.model;
 
 import domen.Zapisnik;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -15,11 +17,13 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModelTabeleZapisnici extends AbstractTableModel{
     
+    private List<Zapisnik> sviZapisnici;
     List<Zapisnik> lista = new ArrayList<>();
     String[] kolone = {"id","datum evidentiranja","tekst","ukupno trajanje","instruktor","polaznik"};
 
     public ModelTabeleZapisnici(List<Zapisnik> lista) {
         this.lista = lista;
+        this.sviZapisnici = new ArrayList<>(lista);
     }
 
     @Override
@@ -64,6 +68,17 @@ public class ModelTabeleZapisnici extends AbstractTableModel{
     @Override
     public String getColumnName(int column) {
         return kolone[column];
+    }
+
+    public void pretrazi(String tekst, int trajanje, Date datumEvidentiranja) {
+        this.lista = sviZapisnici.stream()
+                .filter(z -> datumEvidentiranja == null || z.getDatumEvidentiranja().equals(datumEvidentiranja))
+                .filter(z -> tekst == null || tekst.isBlank() || 
+                        (z.getTekst() != null && z.getTekst().toLowerCase().contains(tekst.toLowerCase())))
+                .filter(z -> trajanje <= 0 || z.getUkupnoTrajanje() == trajanje)
+                .collect(Collectors.toList());
+
+        fireTableDataChanged();    
     }
 
     

@@ -6,8 +6,10 @@ package komunikacija;
 
 import domen.Instruktor;
 import domen.Kategorija;
+import domen.Licenca;
 import domen.Polaznik;
 import domen.StavkaZapisnika;
+import domen.Usluga;
 import domen.Zapisnik;
 import java.io.IOException;
 import java.net.Socket;
@@ -153,6 +155,119 @@ public class Komunikacija {
         stavke= (List<StavkaZapisnika>) odg.getOdgovor();
         
         return stavke;
+    }
+
+    public void dodajZapisnik(Zapisnik z) throws Exception {
+        Zahtev zh = new Zahtev(Operacije.DODAJ_ZAPISNIK, z);
+        posiljalac.posalji(zh);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor()==null ) {
+            
+        }else{
+            throw (Exception)odg.getOdgovor();
+        }
+    }
+
+    public void izmeniZapisnik(Zapisnik z) throws Exception {
+        Zahtev zh = new Zahtev(Operacije.IZMENI_ZAPISNIK, z);
+        posiljalac.posalji(zh);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor()==null ) {
+            Koordinator.getInstance().osveziFormu();
+        }else{
+            throw (Exception)odg.getOdgovor();
+        }
+    }
+
+    public void obrisiZapisnik(Zapisnik p) throws Exception {
+        Zahtev z = new Zahtev(Operacije.OBRISI_ZAPISNIK, p);
+        posiljalac.posalji(z);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor()==null ) {
+            
+        }else{
+            throw new Exception("greska");
+        }
+    }
+
+    public void obrisiStavkuZapisnika(StavkaZapisnika p) throws Exception {
+        Zahtev z = new Zahtev(Operacije.OBRISI_STAVKU_ZAPISNIKA, p);
+        posiljalac.posalji(z);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor()==null ) {
+            
+        }else{
+            throw new Exception("greska");
+        }
+    }
+
+    public void dodajStavku(StavkaZapisnika sz) throws Exception {
+        Zahtev z = new Zahtev(Operacije.DODAJ_STAVKU_ZAPISNIKA,sz);
+        posiljalac.posalji(z);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor()==null ) {
+            
+        }else{
+            throw new Exception("greska");
+        }
+    }
+
+    public void izmeniStavku(StavkaZapisnika sz) throws Exception {
+        Zahtev z = new Zahtev(Operacije.IZMENI_STAVKU_ZAPISNIKA,sz);
+        posiljalac.posalji(z);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor()==null ) {
+            
+        }else{
+            throw new Exception("greska");
+        }
+
+
+    }
+
+    public List<Usluga> ucitajUsluge() {
+        Zahtev z = new Zahtev(Operacije.UCITAJ_USLUGE, null);
+        List<Usluga> zapisnici = new ArrayList<>();
+        
+        posiljalac.posalji(z);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        zapisnici= (List<Usluga>) odg.getOdgovor();
+        
+        return zapisnici;
+
+
+    }
+
+    public List<Licenca> ucitajLicence() {
+        Zahtev z = new Zahtev(Operacije.UCITAJ_LICENCE, null);
+        List<Licenca> zapisnici = new ArrayList<>();
+        
+        posiljalac.posalji(z);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        zapisnici= (List<Licenca>) odg.getOdgovor();
+        
+        return zapisnici;
+    }
+
+    public void dodajLicencuZaInstruktora(Licenca l) throws Exception {
+        Zahtev z = new Zahtev(Operacije.DODAJ_LICENCU,l);
+        posiljalac.posalji(z);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor()==null ) {
+            
+        }else{
+            throw new Exception("greska");
+        }
+
     }
     
     

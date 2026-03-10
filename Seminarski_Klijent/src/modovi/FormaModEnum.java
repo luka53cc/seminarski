@@ -8,6 +8,6 @@ package modovi;
  *
  * @author Luka
  */
-public enum FormaModPolaznikEnum {
+public enum FormaModEnum {
     DODAJ,IZMENI;
 }

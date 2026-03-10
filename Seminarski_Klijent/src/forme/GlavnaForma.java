@@ -83,6 +83,11 @@ public class GlavnaForma extends javax.swing.JFrame {
         jMenu2.setText("Zapisnik");
 
         jMenuItem5.setText("Kreiraj");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem5);
 
         jMenuItem6.setText("Pregled");
@@ -98,6 +103,11 @@ public class GlavnaForma extends javax.swing.JFrame {
         jMenu3.setText("Licenca");
 
         jMenuItem8.setText("Ubaci licencu");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem8);
 
         jMenuBar1.add(jMenu3);
@@ -138,12 +148,20 @@ public class GlavnaForma extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        Koordinator.getInstance().otvoriDodajPacijentaFormu();
+        Koordinator.getInstance().otvoriDodajPolaznikaFormu();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         Koordinator.getInstance().otvoriPrikazZapisnikaFormu();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        Koordinator.getInstance().otvoriDodajZapisnikFormu();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        Koordinator.getInstance().otvoriUbaciLicencuFormu();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     public JLabel getjLabelUlogovan() {
         return jLabelUlogovan;

@@ -15,7 +15,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
 import koordinator.Koordinator;
-import modovi.FormaModPolaznikEnum;
+import modovi.FormaModEnum;
 
 /**
  *
@@ -79,7 +79,7 @@ public class DodajPolaznikaController {
                     dpf.dispose();
                     
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(dpf, "Greska", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(dpf, "Greska u nekom od polja", "Greska", JOptionPane.ERROR_MESSAGE);
                     ex.printStackTrace();
                 }
                 
@@ -88,22 +88,23 @@ public class DodajPolaznikaController {
   
     }    
 
-    public void otvoriFormu(FormaModPolaznikEnum mod) {
+    public void otvoriFormu(FormaModEnum mod) {
         pripremiFormu(mod);
         dpf.setVisible(true);
-        if (mod==FormaModPolaznikEnum.DODAJ) {
+        if (mod==FormaModEnum.DODAJ) {
             JOptionPane.showMessageDialog(dpf, "Sistem je kreirao polaznika", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+        
         }
 
     }
 
-    public void pripremiFormu(FormaModPolaznikEnum mod) {
+    public void pripremiFormu(FormaModEnum mod) {
         dpf.getjComboBoxKategorija().removeAllItems();
         List<Kategorija> kategorije = Komunikacija.getInstance().ucitajKategorije();
         for (Kategorija k : kategorije) {
             dpf.getjComboBoxKategorija().addItem(k);
         }
-        if (mod==FormaModPolaznikEnum.DODAJ) {
+        if (mod==FormaModEnum.DODAJ) {
             dpf.getjButtonDodaj().setVisible(true);
             dpf.getjButtonIzmeni().setVisible(false);
             dpf.getjTextFieldID().setVisible(false);
@@ -114,6 +115,7 @@ public class DodajPolaznikaController {
             dpf.getjTextFieldID().setVisible(true);
             dpf.getjTextFieldID().setEnabled(false);
             dpf.getjLabelID().setVisible(true);
+            
             
             Polaznik p = (Polaznik) Koordinator.getInstance().vratiParam("polaznik");
             dpf.getjTextFieldIP().setText(p.getImePrezimePolaznika());

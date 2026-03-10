@@ -5,19 +5,26 @@
 package koordinator;
 
 import domen.Instruktor;
+import domen.Zapisnik;
 import forme.DodajPolaznikaForma;
+import forme.DodajStavkuForma;
+import forme.DodajZapisnikForma;
 import forme.GlavnaForma;
 import forme.LoginForma;
 import forme.PrikazPolaznikaForma;
 import forme.PrikazZapisnikaForma;
+import forme.UbaciLicencuForma;
 import java.util.HashMap;
 import java.util.Map;
 import kontroler.DodajPolaznikaController;
+import kontroler.DodajStavkuController;
+import kontroler.DodajZapisnikController;
 import kontroler.GlavnaFormaController;
 import kontroler.LoginController;
 import kontroler.PrikazPolaznikaController;
 import kontroler.PrikazZapisnikaController;
-import modovi.FormaModPolaznikEnum;
+import kontroler.UbaciLicencuController;
+import modovi.FormaModEnum;
 
 /**
  *
@@ -31,6 +38,11 @@ public class Koordinator {
     private PrikazPolaznikaController ppController;
     private DodajPolaznikaController dpController;
     private PrikazZapisnikaController pzController;
+    private DodajZapisnikController dzController;
+    private DodajStavkuController dszController;
+    private UbaciLicencuController ulController;
+    private Zapisnik selektovan;
+    
     
     
     private Map<String, Object> parametri;
@@ -60,14 +72,22 @@ public class Koordinator {
         ppController.otvoriFormu();
         
     }
-    public void otvoriDodajPacijentaFormu() {
+    public void otvoriDodajPolaznikaFormu() {
         dpController = new DodajPolaznikaController(new DodajPolaznikaForma());
-        dpController.otvoriFormu(FormaModPolaznikEnum.DODAJ);
+        dpController.otvoriFormu(FormaModEnum.DODAJ);
     }
     public void otvoriPrikazZapisnikaFormu() {
         pzController = new PrikazZapisnikaController(new PrikazZapisnikaForma());
         pzController.otvoriFormu();
         
+    }
+
+    public Zapisnik getSelektovan() {
+        return selektovan;
+    }
+
+    public void setSelektovan(Zapisnik selektovan) {
+        this.selektovan = selektovan;
     }
 
 
@@ -94,12 +114,37 @@ public class Koordinator {
 
     public void otvoriIzmeniPolaznikaFormu() {
         dpController = new DodajPolaznikaController(new DodajPolaznikaForma());
-        dpController.otvoriFormu(FormaModPolaznikEnum.IZMENI);
+        dpController.otvoriFormu(FormaModEnum.IZMENI);
         
     }
 
     public void osveziFormu() {
         ppController.pripremiFormu();
+    }
+
+    public void otvoriIzmeniZapisnikFormu() {
+        dzController = new DodajZapisnikController(new DodajZapisnikForma());
+        dzController.otvoriFormu(FormaModEnum.IZMENI);
+    }
+
+    public void otvoriDodajZapisnikFormu() {
+        dzController = new DodajZapisnikController(new DodajZapisnikForma());
+        dzController.otvoriFormu(FormaModEnum.DODAJ);
+    }
+
+    public void otvoriIzmeniStavkuFormu() {
+        dszController = new DodajStavkuController(new DodajStavkuForma());
+        dszController.otvoriFormu(FormaModEnum.IZMENI);
+    }
+
+    public void otvoriDodajStavkuFormu() {
+        dszController = new DodajStavkuController(new DodajStavkuForma());
+        dszController.otvoriFormu(FormaModEnum.DODAJ);
+    }
+
+    public void otvoriUbaciLicencuFormu() {
+        ulController = new UbaciLicencuController(new UbaciLicencuForma());
+        ulController.otvoriFormu();
     }
     
     

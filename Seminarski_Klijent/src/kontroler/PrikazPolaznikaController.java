@@ -25,10 +25,11 @@ import koordinator.Koordinator;
  * @author Luka
  */
 public class PrikazPolaznikaController {
+
     private final PrikazPolaznikaForma ppf;
-        
-    public PrikazPolaznikaController(PrikazPolaznikaForma ppf){
-        this.ppf=ppf;
+
+    public PrikazPolaznikaController(PrikazPolaznikaForma ppf) {
+        this.ppf = ppf;
         addAtionListener();
     }
 
@@ -37,40 +38,38 @@ public class PrikazPolaznikaController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int red = ppf.getjTablePolaznici().getSelectedRow();
-                if (red==-1) {
+                if (red == -1) {
                     JOptionPane.showMessageDialog(ppf, "Sistem ne moze da nadje polaznika", "Greska", JOptionPane.ERROR_MESSAGE);
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(ppf, "Sistem je nasao polaznika", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     ModelTabelePolaznik mtp = (ModelTabelePolaznik) ppf.getjTablePolaznici().getModel();
                     Polaznik p = mtp.getLista().get(red);
                     try {
                         Komunikacija.getInstance().obrisiPolaznika(p);
-                        JOptionPane.showMessageDialog(ppf, "Sistem je obrisao polaznika", "Uspeh",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(ppf, "Sistem je obrisao polaznika", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                         pripremiFormu();
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(ppf, "Sistem ne moze da obrise polaznika", "Greska",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(ppf, "Sistem ne moze da obrise polaznika", "Greska", JOptionPane.ERROR_MESSAGE);
                         ex.printStackTrace();
                     }
                 }
             }
         });
-        
-        
+
         ppf.addbtnIzmeniActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int red = ppf.getjTablePolaznici().getSelectedRow();
-                if (red==-1) {
+                if (red == -1) {
                     JOptionPane.showMessageDialog(ppf, "Sistem ne moze da nadje polaznika", "Greska", JOptionPane.ERROR_MESSAGE);
-                }else{
+                } else {
                     //JOptionPane.showMessageDialog(ppf, "Sistem je nasao polaznika", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     ModelTabelePolaznik mtp = (ModelTabelePolaznik) ppf.getjTablePolaznici().getModel();
                     Polaznik p = mtp.getLista().get(red);
-                    
+
                     Koordinator.getInstance().dodajParam("polaznik", p);
                     Koordinator.getInstance().otvoriIzmeniPolaznikaFormu();
-                    
-                    
+
                 }
             }
         });
@@ -97,8 +96,8 @@ public class PrikazPolaznikaController {
                     }
                 }
 
-                ModelTabelePolaznik mtp =
-                        (ModelTabelePolaznik) ppf.getjTablePolaznici().getModel();
+                ModelTabelePolaznik mtp
+                        = (ModelTabelePolaznik) ppf.getjTablePolaznici().getModel();
 
                 mtp.pretrazi(imeP, jmbg, datumRodjenja, kat);
 
@@ -107,11 +106,15 @@ public class PrikazPolaznikaController {
         ppf.addbtnResetujActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ppf.getjComboBoxKategorija().setSelectedIndex(0);
+                ppf.getjTextFieldDate().setText("");
+                ppf.getjTextFieldIP().setText("");
+                ppf.getjTextFieldJMBG().setText("");
                 pripremiFormu();
             }
         });
-  
-    }    
+
+    }
 
     public void otvoriFormu() {
         pripremiFormu();
@@ -121,7 +124,7 @@ public class PrikazPolaznikaController {
     public void pripremiFormu() {
         ppf.getjComboBoxKategorija().removeAllItems();
         List<Kategorija> kategorije = Komunikacija.getInstance().ucitajKategorije();
-        Kategorija sve = new Kategorija(0, "sve kategorije",null);
+        Kategorija sve = new Kategorija(0, "sve kategorije", null);
         ppf.getjComboBoxKategorija().addItem(sve);
         for (Kategorija k : kategorije) {
             ppf.getjComboBoxKategorija().addItem(k);
@@ -133,5 +136,4 @@ public class PrikazPolaznikaController {
         ppf.getjTablePolaznici().setModel(mtp);
     }
 
-    
 }

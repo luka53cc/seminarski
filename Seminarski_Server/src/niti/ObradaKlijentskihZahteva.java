@@ -3,8 +3,10 @@ package niti;
 import controller.Controller;
 import domen.Instruktor;
 import domen.Kategorija;
+import domen.Licenca;
 import domen.Polaznik;
 import domen.StavkaZapisnika;
+import domen.Usluga;
 import domen.Zapisnik;
 import java.io.IOException;
 import java.net.Socket;
@@ -92,6 +94,79 @@ public class ObradaKlijentskihZahteva extends Thread {
                         List<StavkaZapisnika> stavke = Controller.getInstance().ucitajStavke((int) zahtev.getParam());
                         odgovor.setOdgovor(stavke);
                         break;
+                    case UCITAJ_USLUGE:
+                        List<Usluga> usluge = Controller.getInstance().ucitajUsluge();
+                        odgovor.setOdgovor(usluge);
+                        break;
+                    case UCITAJ_LICENCE:
+                        List<Licenca> licence = Controller.getInstance().ucitajLicence();
+                        odgovor.setOdgovor(licence);
+                        break;
+                        
+                    case DODAJ_ZAPISNIK:
+                        try {
+                            Zapisnik z = (Zapisnik) zahtev.getParam();
+                            Controller.getInstance().dodajZapisnik(z);
+                            odgovor.setOdgovor(null);
+                        } catch (Exception e) {
+                            odgovor.setOdgovor(e);
+                        }
+                        break;
+                    case IZMENI_ZAPISNIK:
+                        try {
+                            Zapisnik z1 = (Zapisnik) zahtev.getParam();
+                            Controller.getInstance().izmeniZapisnik(z1);
+                            odgovor.setOdgovor(null);
+                        } catch (Exception e) {
+                            odgovor.setOdgovor(e);
+                        }
+                        break;
+                    case OBRISI_ZAPISNIK:
+                        try {
+                            Zapisnik p = (Zapisnik) zahtev.getParam();
+                            Controller.getInstance().obrisiZapisnik(p);
+                            odgovor.setOdgovor(null);
+                        } catch (Exception e) {
+                            odgovor.setOdgovor(e);
+                        }
+                        break;
+                    case OBRISI_STAVKU_ZAPISNIKA:
+                        try {
+                            StavkaZapisnika p = (StavkaZapisnika) zahtev.getParam();
+                            Controller.getInstance().obrisiStavkuZapisnika(p);
+                            odgovor.setOdgovor(null);
+                        } catch (Exception e) {
+                            odgovor.setOdgovor(e);
+                        }
+                        break;
+                    case DODAJ_STAVKU_ZAPISNIKA:
+                        try {
+                            StavkaZapisnika p = (StavkaZapisnika) zahtev.getParam();
+                            Controller.getInstance().dodajStavku(p);
+                            odgovor.setOdgovor(null);
+                        } catch (Exception e) {
+                            odgovor.setOdgovor(e);
+                        }
+                        break;
+                    case IZMENI_STAVKU_ZAPISNIKA:
+                        try {
+                            StavkaZapisnika p = (StavkaZapisnika) zahtev.getParam();
+                            Controller.getInstance().izmeniStavku(p);
+                            odgovor.setOdgovor(null);
+                        } catch (Exception e) {
+                            odgovor.setOdgovor(e);
+                        }
+                        break;
+                    case DODAJ_LICENCU:
+                        try {
+                            Licenca l = (Licenca) zahtev.getParam();
+                            Controller.getInstance().dodajLicencu(l);
+                            odgovor.setOdgovor(null);
+                        } catch (Exception e) {
+                            odgovor.setOdgovor(e);
+                        }                        
+                        break;
+                        
                     default:
                         System.out.println("GRESKA, OPERACIJA NE POSTOJI");
                 }
