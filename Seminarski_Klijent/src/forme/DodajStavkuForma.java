@@ -17,14 +17,14 @@ import javax.swing.JTextField;
  *
  * @author Luka
  */
-public class DodajStavkuForma extends javax.swing.JDialog {
+public class DodajStavkuForma extends javax.swing.JFrame {
     Zapisnik zapisnik;
 
     /**
      * Creates new form DodajStavkuForma
      */
-    public DodajStavkuForma(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public DodajStavkuForma(Zapisnik zapisnik) {
+        this.zapisnik=zapisnik;
         initComponents();
     }
 
@@ -44,7 +44,6 @@ public class DodajStavkuForma extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButtonDodaj = new javax.swing.JButton();
-        jButtonIzmeni = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -58,8 +57,6 @@ public class DodajStavkuForma extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButtonDodaj.setText("Dodaj");
-
-        jButtonIzmeni.setText("Izmeni");
 
         jLabel1.setText("Trajanje:");
 
@@ -86,9 +83,7 @@ public class DodajStavkuForma extends javax.swing.JDialog {
                             .addComponent(jTextFieldTrajanje, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonDodaj, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonIzmeni, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jButtonDodaj)
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
@@ -97,9 +92,7 @@ public class DodajStavkuForma extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(78, 78, 78)
-                        .addComponent(jButtonDodaj)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonIzmeni))
+                        .addComponent(jButtonDodaj))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -122,9 +115,7 @@ public class DodajStavkuForma extends javax.swing.JDialog {
         return jButtonDodaj;
     }
 
-    public JButton getjButtonIzmeni() {
-        return jButtonIzmeni;
-    }
+
 
     public JComboBox<Usluga> getjComboBox1() {
         return jComboBox1;
@@ -142,10 +133,13 @@ public class DodajStavkuForma extends javax.swing.JDialog {
         return jTextFieldTrajanje;
     }
 
+    public Zapisnik getZapisnik() {
+        return zapisnik;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDodaj;
-    private javax.swing.JButton jButtonIzmeni;
     private javax.swing.JComboBox<Usluga> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -158,8 +152,6 @@ public class DodajStavkuForma extends javax.swing.JDialog {
     public void addbtnDodajActionListener(ActionListener actionListener) {
         jButtonDodaj.addActionListener(actionListener);
     }
-    public void addbtnIzmeniActionListener(ActionListener actionListener) {
-        jButtonIzmeni.addActionListener(actionListener);
-    }
+
 
 }

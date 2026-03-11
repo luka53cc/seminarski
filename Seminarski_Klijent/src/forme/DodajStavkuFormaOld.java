@@ -4,6 +4,7 @@
  */
 package forme;
 
+import domen.StavkaZapisnika;
 import domen.Usluga;
 import domen.Zapisnik;
 import java.awt.event.ActionListener;
@@ -19,10 +20,15 @@ import javax.swing.JTextField;
  */
 public class DodajStavkuFormaOld extends javax.swing.JFrame {
     Zapisnik zapisnik;
+    StavkaZapisnika sz;
+    int mod;
     /**
      * Creates new form DodajStavkuForma
      */
-    public DodajStavkuFormaOld(Zapisnik zapisnik) {
+    public DodajStavkuFormaOld(Zapisnik zapisnik,StavkaZapisnika sz, int mod) {
+        this.zapisnik=zapisnik;
+        this.sz=sz;
+        this.mod=mod;
         initComponents();
     }
 
@@ -32,6 +38,14 @@ public class DodajStavkuFormaOld extends javax.swing.JFrame {
 
     public void setZapisnik(Zapisnik zapisnik) {
         this.zapisnik = zapisnik;
+    }
+
+    public StavkaZapisnika getSz() {
+        return sz;
+    }
+
+    public int getMod() {
+        return mod;
     }
 
     /**

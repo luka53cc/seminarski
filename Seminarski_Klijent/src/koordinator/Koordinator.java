@@ -5,8 +5,10 @@
 package koordinator;
 
 import domen.Instruktor;
+import domen.StavkaZapisnika;
 import domen.Zapisnik;
 import forme.DodajPolaznikaForma;
+import forme.DodajStavkuForma;
 import forme.DodajStavkuFormaOld;
 
 import forme.DodajZapisnikForma;
@@ -19,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import kontroler.DodajPolaznikaController;
 import kontroler.DodajStavkuController;
+import kontroler.DodajStavku2Controller;
 import kontroler.DodajZapisnikController;
 import kontroler.GlavnaFormaController;
 import kontroler.LoginController;
@@ -42,6 +45,8 @@ public class Koordinator {
     private DodajZapisnikController dzController;
     private DodajStavkuController dszController;
     private UbaciLicencuController ulController;
+    private DodajStavku2Controller dsdController;
+    
     private Zapisnik selektovan;
     
     
@@ -133,19 +138,23 @@ public class Koordinator {
         dzController.otvoriFormu(FormaModEnum.DODAJ);
     }
 
-    public void otvoriIzmeniStavkuFormu(Zapisnik zapisnik) {
-        dszController = new DodajStavkuController(new DodajStavkuFormaOld(zapisnik));
+    public void otvoriIzmeniStavkuFormu(StavkaZapisnika sz) {
+        dszController = new DodajStavkuController(new DodajStavkuFormaOld(null,sz,2));
         dszController.otvoriFormu(FormaModEnum.IZMENI);
     }
 
     public void otvoriDodajStavkuFormu(Zapisnik z) {
-        dszController = new DodajStavkuController(new DodajStavkuFormaOld(z));
+        dszController = new DodajStavkuController(new DodajStavkuFormaOld(z,null,1));
         dszController.otvoriFormu(FormaModEnum.DODAJ);
     }
 
     public void otvoriUbaciLicencuFormu() {
         ulController = new UbaciLicencuController(new UbaciLicencuForma());
         ulController.otvoriFormu();
+    }
+
+    public void otvoriDodajStavkuDialog(Zapisnik zapisnik) {
+        dsdController= new DodajStavku2Controller(new DodajStavkuForma(zapisnik));
     }
     
     

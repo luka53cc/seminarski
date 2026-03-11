@@ -49,10 +49,7 @@
                   </Group>
               </Group>
               <EmptySpace pref="25" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jButtonDodaj" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonIzmeni" alignment="1" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jButtonDodaj" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -64,8 +61,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                       <Component id="jButtonDodaj" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonIzmeni" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -131,11 +126,6 @@
     <Component class="javax.swing.JButton" name="jButtonDodaj">
       <Properties>
         <Property name="text" type="java.lang.String" value="Dodaj"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButtonIzmeni">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Izmeni"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">

@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -117,7 +118,7 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonDodajStavku, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButtonObrisiStavku, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -232,6 +233,10 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
         return jTextArea1;
     }
 
+    public List<StavkaZapisnika> getListaStavki() {
+        return listaStavki;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
@@ -275,6 +280,10 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
     }
     public void addbtnNazadStavkuActionListener(ActionListener actionListener) {
         jButtonNazad.addActionListener(actionListener);
+    }
+
+    public JTable getjTableStavke() {
+        return jTableStavke;
     }
    
     

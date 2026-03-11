@@ -20,6 +20,7 @@ public class IzmeniStavkuSO extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat, String kljuc) throws Exception {
+        System.out.println((StavkaZapisnika)objekat);
         broker.edit((StavkaZapisnika)objekat);
     }
     

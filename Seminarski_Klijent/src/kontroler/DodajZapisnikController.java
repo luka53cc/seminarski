@@ -8,6 +8,7 @@ import domen.Polaznik;
 import domen.StavkaZapisnika;
 import domen.Zapisnik;
 import forme.DodajZapisnikForma;
+import forme.model.ModelTabeleStavkaZapisnika;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -25,10 +26,13 @@ import modovi.FormaModEnum;
 public class DodajZapisnikController {
     List<StavkaZapisnika> stavke=new ArrayList<>();
     private final DodajZapisnikForma dzf;
+    Zapisnik z;
         
     public DodajZapisnikController(DodajZapisnikForma dzf){
+        this.z = new Zapisnik();
         this.dzf=dzf;
         addAtionListener();
+        dzf.getjButtonSacuvaj().setEnabled(false);
     }
 
     private void addAtionListener() {
@@ -45,8 +49,12 @@ public class DodajZapisnikController {
                     Polaznik polaznik = (Polaznik) dzf.getjComboBoxPolaznik().getSelectedItem();
                     String tekst = dzf.getjTextArea1().getText().trim();
                     Date datumE = Date.valueOf(datum);
-                    Zapisnik z = new Zapisnik(0, datumE,tekst , trajanje, Koordinator.getInstance().getUlogovan(), polaznik, null);
-                    
+                    z.setDatumEvidentiranja(datumE);
+                    z.setTekst(tekst);
+                    z.setUkupnoTrajanje(trajanje);
+                    z.setInstruktor(Koordinator.getInstance().getUlogovan());
+                    z.setPolaznik(polaznik);
+                    z.setStavkeZapisnika(stavke);
                     Komunikacija.getInstance().dodajZapisnik(z);
                     JOptionPane.showMessageDialog(dzf, "Sistem je zapamtio zapisnik", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
 
@@ -114,6 +122,38 @@ public class DodajZapisnikController {
 
             }
         });
+        dzf.addbtnDodajStavkuActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dodaj(e);
+            }
+
+            private void dodaj(ActionEvent e) {
+                Koordinator.getInstance().otvoriDodajStavkuDialog(z);
+                dzf.getjButtonSacuvaj().setEnabled(true);
+
+
+            }
+        });
+        dzf.addbtnObrisiStavkuActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                obrisi(e);
+            }
+
+            private void obrisi(ActionEvent e) {
+                int red = dzf.getjTableStavke().getSelectedRow();
+                if (red==-1) {
+                    JOptionPane.showMessageDialog(dzf, "izaberite red", "greska", JOptionPane.ERROR_MESSAGE);
+                }
+                stavke.remove(red);
+                dzf.getjButtonSacuvaj().setEnabled(true);
+
+
+            }
+        });
+        
+        
   
     }    
 
@@ -132,26 +172,9 @@ public class DodajZapisnikController {
         for (Polaznik k : polaznici) {
             dzf.getjComboBoxPolaznik().addItem(k);
         }
-        if (mod==FormaModEnum.DODAJ) {
-            //dzf.getjButtonDodaj().setVisible(true);
-            //dzf.getjButtonIzmeni().setVisible(false);
-        }else {
-            //dzf.getjButtonDodaj().setVisible(false);
-            //dzf.getjButtonIzmeni().setVisible(true);
-            dzf.getjTextFieldID().setVisible(true);
-            dzf.getjTextFieldID().setEnabled(false);
-            dzf.getjTextFieldInstruktor().setEnabled(false);
-            dzf.getjTextFieldID().setEnabled(false);
+        ModelTabeleStavkaZapisnika mtsz = new ModelTabeleStavkaZapisnika(stavke);
+        dzf.getjTableStavke().setModel(mtsz);
 
-            Zapisnik p = (Zapisnik) Koordinator.getInstance().vratiParam("zapisnik");
-            dzf.getjTextFieldInstruktor().setText(Koordinator.getInstance().getUlogovan().getImePrezimeInstruktora());
-            dzf.getjTextFieldInstruktor().setEnabled(false);
-            dzf.getjTextFieldTrajanje().setText(p.getUkupnoTrajanje()+"");
-            dzf.getjTextFieldDate().setText(p.getDatumEvidentiranja().toString());
-            dzf.getjComboBoxPolaznik().setSelectedItem(p.getPolaznik());
-            dzf.getjTextArea1().setText(p.getTekst());
-            dzf.getjTextFieldID().setText(p.getIdZapisnik()+"");
-        }
         
         
     }

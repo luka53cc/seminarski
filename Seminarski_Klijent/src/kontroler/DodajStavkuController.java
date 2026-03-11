@@ -30,6 +30,13 @@ public class DodajStavkuController {
     public DodajStavkuController(DodajStavkuFormaOld dsf) {
         this.dsf = dsf;
         addAtionListener();
+        if (dsf.getMod()==1) {
+            dsf.getjButtonDodaj().setVisible(true);
+            dsf.getjButtonIzmeni().setVisible(false);
+        }else{
+            dsf.getjButtonDodaj().setVisible(false);
+            dsf.getjButtonIzmeni().setVisible(true);
+        }
     }
 
     private void addAtionListener() {
@@ -69,8 +76,10 @@ public class DodajStavkuController {
                     int trajanje = Integer.parseInt(dsf.getjTextFieldTrajanje().getText().trim());
                     Usluga u = (Usluga) dsf.getjComboBox1().getSelectedItem();
                     String tekst = dsf.getjTextArea1().getText().trim();
-                    StavkaZapisnika sz = new StavkaZapisnika(dsf.getZapisnik(), 0, tekst, trajanje, u);
-
+                    StavkaZapisnika sz = dsf.getSz();
+                    sz.setTekst(tekst);
+                    sz.setUsluga(u);
+                    sz.setTrajanjeStavke(trajanje);
                     Komunikacija.getInstance().izmeniStavku(sz);
                     JOptionPane.showMessageDialog(dsf, "Sistem je zapamtio stavku", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
 

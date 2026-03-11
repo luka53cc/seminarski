@@ -131,7 +131,7 @@ public class PrikazZapisnikaController {
                     JOptionPane.showMessageDialog(pzf, "Sistem ne moze da nadje stavku", "Greska", JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(pzf, "Sistem je nasao stavku", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
-                    ModelTabeleStavkaZapisnika mtp = (ModelTabeleStavkaZapisnika) pzf.getjTableZapisnici().getModel();
+                    ModelTabeleStavkaZapisnika mtp = (ModelTabeleStavkaZapisnika) pzf.getjTableStavke().getModel();
                     StavkaZapisnika p = mtp.getLista().get(red);
                     try {
                         Komunikacija.getInstance().obrisiStavkuZapisnika(p);
@@ -158,9 +158,12 @@ public class PrikazZapisnikaController {
                     
                     ModelTabeleStavkaZapisnika mtp = (ModelTabeleStavkaZapisnika) pzf.getjTableStavke().getModel();
                     StavkaZapisnika p = mtp.getLista().get(red);
+                    p.setZapisnik(z);
+                    System.out.println(Integer.parseInt(pzf.getjTableStavke().getValueAt(red, 0)+""));
+                    p.setRb(Integer.parseInt(pzf.getjTableStavke().getValueAt(red, 0)+""));
 
                     Koordinator.getInstance().dodajParam("stavkazapisnika", p);
-                    Koordinator.getInstance().otvoriIzmeniStavkuFormu(z);
+                    Koordinator.getInstance().otvoriIzmeniStavkuFormu(p);
 
                 }
             }
