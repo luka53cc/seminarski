@@ -133,7 +133,7 @@ public class StavkaZapisnika implements ApstraktniDomenskiObjekat{
 
     @Override
     public String vratiPrimarniKljuc() {
-        return "stavkazapisnika.idZapisnik="+zapisnik.getIdZapisnik()+"and stavkazapisnika.rb="+rb;
+        return "stavkazapisnika.idZapisnik="+zapisnik.getIdZapisnik()+" and stavkazapisnika.rb="+rb;
     }
 
     @Override

@@ -152,11 +152,15 @@ public class PrikazZapisnikaController {
                 if (red == -1) {
                     JOptionPane.showMessageDialog(pzf, "Sistem ne moze da nadje stavku", "Greska", JOptionPane.ERROR_MESSAGE);
                 } else {
+                    int red2 = pzf.getjTableZapisnici().getSelectedRow();
+                    ModelTabeleZapisnici mtz = (ModelTabeleZapisnici) pzf.getjTableZapisnici().getModel();
+                    Zapisnik z = mtz.getLista().get(red2);
+                    
                     ModelTabeleStavkaZapisnika mtp = (ModelTabeleStavkaZapisnika) pzf.getjTableStavke().getModel();
                     StavkaZapisnika p = mtp.getLista().get(red);
 
                     Koordinator.getInstance().dodajParam("stavkazapisnika", p);
-                    Koordinator.getInstance().otvoriIzmeniStavkuFormu();
+                    Koordinator.getInstance().otvoriIzmeniStavkuFormu(z);
 
                 }
             }
@@ -164,7 +168,10 @@ public class PrikazZapisnikaController {
         pzf.addbtnDodajStavkuActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Koordinator.getInstance().otvoriDodajStavkuFormu();
+                int red2 = pzf.getjTableZapisnici().getSelectedRow();
+                ModelTabeleZapisnici mtz = (ModelTabeleZapisnici) pzf.getjTableZapisnici().getModel();
+                Zapisnik z = mtz.getLista().get(red2);
+                Koordinator.getInstance().otvoriDodajStavkuFormu(z);
             }
         });
         

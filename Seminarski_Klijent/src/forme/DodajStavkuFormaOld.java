@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package forme;
 
@@ -17,15 +17,21 @@ import javax.swing.JTextField;
  *
  * @author Luka
  */
-public class DodajStavkuForma extends javax.swing.JDialog {
+public class DodajStavkuFormaOld extends javax.swing.JFrame {
     Zapisnik zapisnik;
-
     /**
      * Creates new form DodajStavkuForma
      */
-    public DodajStavkuForma(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public DodajStavkuFormaOld(Zapisnik zapisnik) {
         initComponents();
+    }
+
+    public Zapisnik getZapisnik() {
+        return zapisnik;
+    }
+
+    public void setZapisnik(Zapisnik zapisnik) {
+        this.zapisnik = zapisnik;
     }
 
     /**
@@ -37,17 +43,23 @@ public class DodajStavkuForma extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonDodaj = new javax.swing.JButton();
+        jButtonIzmeni = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jLabelUsluga = new javax.swing.JLabel();
         jTextFieldTrajanje = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButtonDodaj = new javax.swing.JButton();
-        jButtonIzmeni = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButtonDodaj.setText("Dodaj");
+
+        jButtonIzmeni.setText("Izmeni");
+
+        jLabel1.setText("Trajanje:");
 
         jLabelUsluga.setText("Usluga:");
 
@@ -56,12 +68,6 @@ public class DodajStavkuForma extends javax.swing.JDialog {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
-
-        jButtonDodaj.setText("Dodaj");
-
-        jButtonIzmeni.setText("Izmeni");
-
-        jLabel1.setText("Trajanje:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,7 +91,7 @@ public class DodajStavkuForma extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldTrajanje, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonDodaj, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonIzmeni, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -113,11 +119,12 @@ public class DodajStavkuForma extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
     public JButton getjButtonDodaj() {
         return jButtonDodaj;
     }
@@ -142,7 +149,6 @@ public class DodajStavkuForma extends javax.swing.JDialog {
         return jTextFieldTrajanje;
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDodaj;
     private javax.swing.JButton jButtonIzmeni;
@@ -160,6 +166,4 @@ public class DodajStavkuForma extends javax.swing.JDialog {
     }
     public void addbtnIzmeniActionListener(ActionListener actionListener) {
         jButtonIzmeni.addActionListener(actionListener);
-    }
-
-}
+    }}

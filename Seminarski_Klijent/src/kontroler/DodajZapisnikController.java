@@ -5,11 +5,13 @@
 package kontroler;
 
 import domen.Polaznik;
+import domen.StavkaZapisnika;
 import domen.Zapisnik;
 import forme.DodajZapisnikForma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
@@ -21,6 +23,7 @@ import modovi.FormaModEnum;
  * @author Luka
  */
 public class DodajZapisnikController {
+    List<StavkaZapisnika> stavke=new ArrayList<>();
     private final DodajZapisnikForma dzf;
         
     public DodajZapisnikController(DodajZapisnikForma dzf){
@@ -84,6 +87,33 @@ public class DodajZapisnikController {
                 
             }
         });
+        dzf.addbtnSacuvajActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sacuvaj(e);
+            }
+
+            private void sacuvaj(ActionEvent e) {
+                try {
+                    int trajanje = Integer.parseInt(dzf.getjTextFieldTrajanje().getText().trim());
+                    String datum = dzf.getjTextFieldDate().getText().trim();
+                    Polaznik polaznik = (Polaznik) dzf.getjComboBoxPolaznik().getSelectedItem();
+                    String tekst = dzf.getjTextArea1().getText().trim();
+                    Date datumE = Date.valueOf(datum);
+                    Zapisnik z = new Zapisnik(0, datumE,tekst , trajanje, Koordinator.getInstance().getUlogovan(), polaznik, stavke);
+                    
+                    Komunikacija.getInstance().dodajZapisnik(z);
+                    JOptionPane.showMessageDialog(dzf, "Sistem je zapamtio zapisnik", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+
+                    dzf.dispose();
+                    
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(dzf, "Greska", "Greska", JOptionPane.ERROR_MESSAGE);
+                    ex.printStackTrace();
+                }
+
+            }
+        });
   
     }    
 
@@ -103,11 +133,11 @@ public class DodajZapisnikController {
             dzf.getjComboBoxPolaznik().addItem(k);
         }
         if (mod==FormaModEnum.DODAJ) {
-            dzf.getjButtonDodaj().setVisible(true);
-            dzf.getjButtonIzmeni().setVisible(false);
+            //dzf.getjButtonDodaj().setVisible(true);
+            //dzf.getjButtonIzmeni().setVisible(false);
         }else {
-            dzf.getjButtonDodaj().setVisible(false);
-            dzf.getjButtonIzmeni().setVisible(true);
+            //dzf.getjButtonDodaj().setVisible(false);
+            //dzf.getjButtonIzmeni().setVisible(true);
             dzf.getjTextFieldID().setVisible(true);
             dzf.getjTextFieldID().setEnabled(false);
             dzf.getjTextFieldInstruktor().setEnabled(false);

@@ -8,7 +8,7 @@ import domen.Polaznik;
 import domen.StavkaZapisnika;
 import domen.Usluga;
 import domen.Zapisnik;
-import forme.DodajStavkuForma;
+import forme.DodajStavkuFormaOld;
 import forme.DodajZapisnikForma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,9 +25,9 @@ import modovi.FormaModEnum;
  */
 public class DodajStavkuController {
 
-    private final DodajStavkuForma dsf;
+    private final DodajStavkuFormaOld dsf;
 
-    public DodajStavkuController(DodajStavkuForma dsf) {
+    public DodajStavkuController(DodajStavkuFormaOld dsf) {
         this.dsf = dsf;
         addAtionListener();
     }
@@ -44,7 +44,7 @@ public class DodajStavkuController {
                     int trajanje = Integer.parseInt(dsf.getjTextFieldTrajanje().getText().trim());
                     Usluga u = (Usluga) dsf.getjComboBox1().getSelectedItem();
                     String tekst = dsf.getjTextArea1().getText().trim();
-                    StavkaZapisnika sz = new StavkaZapisnika(Koordinator.getInstance().getSelektovan(), 0, tekst, trajanje, u);
+                    StavkaZapisnika sz = new StavkaZapisnika(dsf.getZapisnik(), 0, tekst, trajanje, u);
 
                     Komunikacija.getInstance().dodajStavku(sz);
                     JOptionPane.showMessageDialog(dsf, "Sistem je zapamtio stavku", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
@@ -69,7 +69,7 @@ public class DodajStavkuController {
                     int trajanje = Integer.parseInt(dsf.getjTextFieldTrajanje().getText().trim());
                     Usluga u = (Usluga) dsf.getjComboBox1().getSelectedItem();
                     String tekst = dsf.getjTextArea1().getText().trim();
-                    StavkaZapisnika sz = new StavkaZapisnika(Koordinator.getInstance().getSelektovan(), 0, tekst, trajanje, u);
+                    StavkaZapisnika sz = new StavkaZapisnika(dsf.getZapisnik(), 0, tekst, trajanje, u);
 
                     Komunikacija.getInstance().izmeniStavku(sz);
                     JOptionPane.showMessageDialog(dsf, "Sistem je zapamtio stavku", "Uspeh", JOptionPane.INFORMATION_MESSAGE);

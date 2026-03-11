@@ -6,7 +6,10 @@ package forme;
 
 import domen.Kategorija;
 import domen.Polaznik;
+import domen.StavkaZapisnika;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -18,7 +21,7 @@ import javax.swing.JTextField;
  * @author Luka
  */
 public class DodajZapisnikForma extends javax.swing.JFrame {
-
+    List<StavkaZapisnika> listaStavki = new ArrayList<>();
     /**
      * Creates new form DodajZapisnikForma
      */
@@ -35,6 +38,7 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton3 = new javax.swing.JButton();
         jComboBoxPolaznik = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabelID = new javax.swing.JLabel();
@@ -45,11 +49,19 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldDate = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButtonDodaj = new javax.swing.JButton();
-        jButtonIzmeni = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableStavke = new javax.swing.JTable();
+        jButtonDodajStavku = new javax.swing.JButton();
+        jButtonObrisiStavku = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jButtonSacuvaj = new javax.swing.JButton();
+        jButtonNazad = new javax.swing.JButton();
+
+        jButton3.setText("jButton3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,15 +75,71 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
 
         jLabel4.setText("Polaznik:");
 
-        jButtonDodaj.setText("Dodaj");
-
-        jButtonIzmeni.setText("Izmeni");
-
         jLabel5.setText("Tekst:");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
+
+        jTableStavke.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableStavke);
+
+        jButtonDodajStavku.setText("Dodaj");
+        jButtonDodajStavku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDodajStavkuActionPerformed(evt);
+            }
+        });
+
+        jButtonObrisiStavku.setText("Obrisi");
+
+        jLabel6.setText("Stavke zapisnika");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonDodajStavku, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonObrisiStavku, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(40, 40, 40))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel6)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonDodajStavku)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonObrisiStavku)
+                        .addContainerGap(131, Short.MAX_VALUE))))
+        );
+
+        jButtonSacuvaj.setText("Sacuvaj");
+
+        jButtonNazad.setText("Nazad");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,15 +168,22 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
                                     .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldInstruktor, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonDodaj, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonIzmeni, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1)))
                 .addGap(22, 22, 22))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jButtonNazad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonSacuvaj)
+                .addGap(55, 55, 55))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,12 +198,10 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
                     .addComponent(jTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonDodaj)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldTrajanje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonIzmeni)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldInstruktor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -139,11 +212,21 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSacuvaj)
+                    .addComponent(jButtonNazad))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonDodajStavkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDodajStavkuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonDodajStavkuActionPerformed
 
     public JTextArea getjTextArea1() {
         return jTextArea1;
@@ -151,16 +234,23 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonDodaj;
-    private javax.swing.JButton jButtonIzmeni;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonDodajStavku;
+    private javax.swing.JButton jButtonNazad;
+    private javax.swing.JButton jButtonObrisiStavku;
+    private javax.swing.JButton jButtonSacuvaj;
     private javax.swing.JComboBox<Polaznik> jComboBoxPolaznik;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelID;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableStavke;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldDate;
     private javax.swing.JTextField jTextFieldID;
@@ -169,11 +259,25 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void addbtnDodajActionListener(ActionListener actionListener) {
-        jButtonDodaj.addActionListener(actionListener);
+     //   jButtonDodaj.addActionListener(actionListener);
     }
     public void addbtnIzmeniActionListener(ActionListener actionListener) {
-        jButtonIzmeni.addActionListener(actionListener);
+       // jButtonIzmeni.addActionListener(actionListener);
     }
+    public void addbtnDodajStavkuActionListener(ActionListener actionListener) {
+        jButtonDodajStavku.addActionListener(actionListener);
+    }
+    public void addbtnObrisiStavkuActionListener(ActionListener actionListener) {
+        jButtonObrisiStavku.addActionListener(actionListener);
+    }
+    public void addbtnSacuvajActionListener(ActionListener actionListener) {
+        jButtonSacuvaj.addActionListener(actionListener);
+    }
+    public void addbtnNazadStavkuActionListener(ActionListener actionListener) {
+        jButtonNazad.addActionListener(actionListener);
+    }
+   
+    
 
     public JLabel getjLabelID() {
         return jLabelID;
@@ -183,13 +287,13 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
         return jTextFieldID;
     }
 
-    public JButton getjButtonDodaj() {
+    /*public JButton getjButtonDodaj() {
         return jButtonDodaj;
     }
 
     public JButton getjButtonIzmeni() {
         return jButtonIzmeni;
-    }
+    }*/
 
     public JComboBox<Polaznik> getjComboBoxPolaznik() {
         return jComboBoxPolaznik;
@@ -197,6 +301,22 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
 
     public JTextField getjTextFieldDate() {
         return jTextFieldDate;
+    }
+
+    public JButton getjButtonDodajStavku() {
+        return jButtonDodajStavku;
+    }
+
+    public JButton getjButtonNazad() {
+        return jButtonNazad;
+    }
+
+    public JButton getjButtonObrisiStavku() {
+        return jButtonObrisiStavku;
+    }
+
+    public JButton getjButtonSacuvaj() {
+        return jButtonSacuvaj;
     }
 
 

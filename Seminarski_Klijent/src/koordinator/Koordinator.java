@@ -7,7 +7,8 @@ package koordinator;
 import domen.Instruktor;
 import domen.Zapisnik;
 import forme.DodajPolaznikaForma;
-import forme.DodajStavkuForma;
+import forme.DodajStavkuFormaOld;
+
 import forme.DodajZapisnikForma;
 import forme.GlavnaForma;
 import forme.LoginForma;
@@ -119,7 +120,7 @@ public class Koordinator {
     }
 
     public void osveziFormu() {
-        ppController.pripremiFormu();
+        pzController.pripremiFormu();
     }
 
     public void otvoriIzmeniZapisnikFormu() {
@@ -132,13 +133,13 @@ public class Koordinator {
         dzController.otvoriFormu(FormaModEnum.DODAJ);
     }
 
-    public void otvoriIzmeniStavkuFormu() {
-        dszController = new DodajStavkuController(new DodajStavkuForma());
+    public void otvoriIzmeniStavkuFormu(Zapisnik zapisnik) {
+        dszController = new DodajStavkuController(new DodajStavkuFormaOld(zapisnik));
         dszController.otvoriFormu(FormaModEnum.IZMENI);
     }
 
-    public void otvoriDodajStavkuFormu() {
-        dszController = new DodajStavkuController(new DodajStavkuForma());
+    public void otvoriDodajStavkuFormu(Zapisnik z) {
+        dszController = new DodajStavkuController(new DodajStavkuFormaOld(z));
         dszController.otvoriFormu(FormaModEnum.DODAJ);
     }
 

@@ -4,6 +4,7 @@
  */
 package operacije.zapisnici;
 
+import domen.StavkaZapisnika;
 import domen.Zapisnik;
 import operacije.ApstraktnaGenerickaOperacija;
 
@@ -20,6 +21,9 @@ public class KreirajZapisnikSO extends ApstraktnaGenerickaOperacija {
     @Override
     protected void izvrsiOperaciju(Object objekat, String kljuc) throws Exception {
         broker.add((Zapisnik)objekat);
+        for (StavkaZapisnika sz : ((Zapisnik)objekat).getStavkeZapisnika()) {
+            broker.add(sz);
+        }
     }
     
 }
