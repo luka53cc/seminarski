@@ -28,6 +28,8 @@ public class DodajZapisnikForma extends javax.swing.JFrame {
      */
     public DodajZapisnikForma() {
         initComponents();
+        jTextFieldID.setEnabled(false);
+        
     }
 
     /**

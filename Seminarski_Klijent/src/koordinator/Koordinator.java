@@ -18,6 +18,7 @@ import forme.PrikazPolaznikaForma;
 import forme.PrikazZapisnikaForma;
 import forme.UbaciLicencuForma;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import kontroler.DodajPolaznikaController;
 import kontroler.DodajStavkuController;
@@ -154,7 +155,13 @@ public class Koordinator {
     }
 
     public void otvoriDodajStavkuDialog(Zapisnik zapisnik) {
-        dsdController= new DodajStavku2Controller(new DodajStavkuForma(zapisnik));
+        dsdController= new DodajStavku2Controller(new DodajStavkuForma(zapisnik,null,true));
+        dsdController.otvoriFormu(true);
+    }
+
+    public void otvoriDodajStavkuZaKreirajZapisnik(Zapisnik zapisnik,List<StavkaZapisnika> stavke) {
+        dsdController= new DodajStavku2Controller(new DodajStavkuForma(zapisnik,stavke,true));
+        dsdController.otvoriFormu(false);
     }
     
     

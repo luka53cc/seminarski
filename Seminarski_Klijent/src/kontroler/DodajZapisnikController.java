@@ -54,6 +54,7 @@ public class DodajZapisnikController {
                     z.setUkupnoTrajanje(trajanje);
                     z.setInstruktor(Koordinator.getInstance().getUlogovan());
                     z.setPolaznik(polaznik);
+                    Koordinator.getInstance().otvoriDodajStavkuZaKreirajZapisnik(z,stavke);
                     z.setStavkeZapisnika(stavke);
                     Komunikacija.getInstance().dodajZapisnik(z);
                     JOptionPane.showMessageDialog(dzf, "Sistem je zapamtio zapisnik", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
@@ -101,38 +102,33 @@ public class DodajZapisnikController {
                 sacuvaj(e);
             }
 
-            private void sacuvaj(ActionEvent e) {
-                try {
-                    int trajanje = Integer.parseInt(dzf.getjTextFieldTrajanje().getText().trim());
-                    String datum = dzf.getjTextFieldDate().getText().trim();
-                    Polaznik polaznik = (Polaznik) dzf.getjComboBoxPolaznik().getSelectedItem();
-                    String tekst = dzf.getjTextArea1().getText().trim();
-                    Date datumE = Date.valueOf(datum);
-                    Zapisnik z = new Zapisnik(0, datumE,tekst , trajanje, Koordinator.getInstance().getUlogovan(), polaznik, stavke);
-                    
-                    Komunikacija.getInstance().dodajZapisnik(z);
-                    JOptionPane.showMessageDialog(dzf, "Sistem je zapamtio zapisnik", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
-
-                    dzf.dispose();
-                    
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(dzf, "Greska", "Greska", JOptionPane.ERROR_MESSAGE);
-                    ex.printStackTrace();
-                }
-
+        // sacuvaj listener stays as is - this is what actually saves to DB
+        private void sacuvaj(ActionEvent e) {
+            try {
+                int trajanje = Integer.parseInt(dzf.getjTextFieldTrajanje().getText().trim());
+                String datum = dzf.getjTextFieldDate().getText().trim();
+                Polaznik polaznik = (Polaznik) dzf.getjComboBoxPolaznik().getSelectedItem();
+                String tekst = dzf.getjTextArea1().getText().trim();
+                Date datumE = Date.valueOf(datum);
+                Zapisnik z = new Zapisnik(0, datumE, tekst, trajanje, 
+                    Koordinator.getInstance().getUlogovan(), polaznik, stavke);
+                Komunikacija.getInstance().dodajZapisnik(z);
+                JOptionPane.showMessageDialog(dzf, "Sistem je zapamtio zapisnik", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                dzf.dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(dzf, "Greska", "Greska", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
             }
+        }
         });
         dzf.addbtnDodajStavkuActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dodaj(e);
-            }
-
-            private void dodaj(ActionEvent e) {
-                Koordinator.getInstance().otvoriDodajStavkuDialog(z);
+                Koordinator.getInstance().otvoriDodajStavkuZaKreirajZapisnik(z, stavke);
+                
+                ModelTabeleStavkaZapisnika mtsz = new ModelTabeleStavkaZapisnika(stavke);
+                dzf.getjTableStavke().setModel(mtsz);
                 dzf.getjButtonSacuvaj().setEnabled(true);
-
-
             }
         });
         dzf.addbtnObrisiStavkuActionListener(new ActionListener() {
@@ -147,6 +143,8 @@ public class DodajZapisnikController {
                     JOptionPane.showMessageDialog(dzf, "izaberite red", "greska", JOptionPane.ERROR_MESSAGE);
                 }
                 stavke.remove(red);
+                ModelTabeleStavkaZapisnika mtsz = new ModelTabeleStavkaZapisnika(stavke);
+                dzf.getjTableStavke().setModel(mtsz);
                 dzf.getjButtonSacuvaj().setEnabled(true);
 
 
@@ -172,6 +170,8 @@ public class DodajZapisnikController {
         for (Polaznik k : polaznici) {
             dzf.getjComboBoxPolaznik().addItem(k);
         }
+        dzf.getjTextFieldInstruktor().setText(Koordinator.getInstance().getUlogovan().getImePrezimeInstruktora());
+        dzf.getjTextFieldInstruktor().setEnabled(false);
         ModelTabeleStavkaZapisnika mtsz = new ModelTabeleStavkaZapisnika(stavke);
         dzf.getjTableStavke().setModel(mtsz);
 

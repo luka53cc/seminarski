@@ -24,7 +24,7 @@ public class Zapisnik implements ApstraktniDomenskiObjekat{
     private int ukupnoTrajanje;
     private Instruktor instruktor;
     private Polaznik polaznik;
-    private List<StavkaZapisnika> stavkeZapisnika;
+    private List<StavkaZapisnika> stavkeZapisnika = new ArrayList<>();
 
     public Zapisnik() {
     }

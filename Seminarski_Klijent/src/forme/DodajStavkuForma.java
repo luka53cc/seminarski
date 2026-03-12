@@ -4,9 +4,12 @@
  */
 package forme;
 
+import domen.StavkaZapisnika;
 import domen.Usluga;
 import domen.Zapisnik;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -17,16 +20,24 @@ import javax.swing.JTextField;
  *
  * @author Luka
  */
-public class DodajStavkuForma extends javax.swing.JFrame {
+public class DodajStavkuForma extends javax.swing.JDialog {
     Zapisnik zapisnik;
+    List<StavkaZapisnika> stavke=new ArrayList<>();
+
+    public JButton getjButtonDodaj2() {
+        return jButtonDodaj2;
+    }
 
     /**
      * Creates new form DodajStavkuForma
-     */
-    public DodajStavkuForma(Zapisnik zapisnik) {
-        this.zapisnik=zapisnik;
+     */   
+    public DodajStavkuForma(Zapisnik zapisnik, List<StavkaZapisnika> stavke, boolean mod) {
+        super((java.awt.Frame) null, true); // modal = true, add this BEFORE initComponents
+        this.zapisnik = zapisnik;
+        this.stavke = stavke;
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,6 +56,7 @@ public class DodajStavkuForma extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jButtonDodaj = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButtonDodaj2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -59,6 +71,8 @@ public class DodajStavkuForma extends javax.swing.JFrame {
         jButtonDodaj.setText("Dodaj");
 
         jLabel1.setText("Trajanje:");
+
+        jButtonDodaj2.setText("Dodaj");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,9 +96,11 @@ public class DodajStavkuForma extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldTrajanje, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jButtonDodaj)
-                .addGap(22, 22, 22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonDodaj)
+                    .addComponent(jButtonDodaj2))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +108,9 @@ public class DodajStavkuForma extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(78, 78, 78)
-                        .addComponent(jButtonDodaj))
+                        .addComponent(jButtonDodaj)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonDodaj2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -113,6 +131,10 @@ public class DodajStavkuForma extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     public JButton getjButtonDodaj() {
         return jButtonDodaj;
+    }
+
+    public List<StavkaZapisnika> getStavke() {
+        return stavke;
     }
 
 
@@ -140,6 +162,7 @@ public class DodajStavkuForma extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDodaj;
+    private javax.swing.JButton jButtonDodaj2;
     private javax.swing.JComboBox<Usluga> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -152,6 +175,10 @@ public class DodajStavkuForma extends javax.swing.JFrame {
     public void addbtnDodajActionListener(ActionListener actionListener) {
         jButtonDodaj.addActionListener(actionListener);
     }
+
+    public void addbtnDodaj2ActionListener(ActionListener actionListener) {
+    jButtonDodaj2.addActionListener(actionListener);
+}
 
 
 }
