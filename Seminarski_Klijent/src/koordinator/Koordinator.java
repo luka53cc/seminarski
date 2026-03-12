@@ -126,7 +126,9 @@ public class Koordinator {
     }
 
     public void osveziFormu() {
-        pzController.pripremiFormu();
+        if (pzController != null) {
+            pzController.pripremiFormu();
+        }
     }
 
     public void otvoriIzmeniZapisnikFormu() {

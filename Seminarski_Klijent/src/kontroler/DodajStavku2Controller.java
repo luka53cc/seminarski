@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package kontroler;
 
 import domen.StavkaZapisnika;
@@ -12,15 +8,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
-import koordinator.Koordinator;
 import modovi.FormaModEnum;
 
-/**
- *
- * @author Luka
- */
 public class DodajStavku2Controller {
-
     private final DodajStavkuForma dsf;
 
     public DodajStavku2Controller(DodajStavkuForma dsf) {
@@ -28,38 +18,66 @@ public class DodajStavku2Controller {
         addAtionListener();
     }
 
+    private boolean validiraj(String trajanjeStr, Usluga u) {
+        if (trajanjeStr.isEmpty()) {
+            JOptionPane.showMessageDialog(dsf, "Trajanje ne sme biti prazno", "Greska", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        try {
+            int trajanje = Integer.parseInt(trajanjeStr);
+            if (trajanje <= 0) {
+                JOptionPane.showMessageDialog(dsf, "Trajanje mora biti vece od 0", "Greska", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(dsf, "Trajanje mora biti broj", "Greska", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (u == null) {
+            JOptionPane.showMessageDialog(dsf, "Morate izabrati uslugu", "Greska", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
     private void addAtionListener() {
-        // jButtonDodaj - mod=true, zapisnik already exists in DB
         dsf.addbtnDodajActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int trajanje = Integer.parseInt(dsf.getjTextFieldTrajanje().getText().trim());
+                    String trajanjeStr = dsf.getjTextFieldTrajanje().getText().trim();
                     Usluga u = (Usluga) dsf.getjComboBox1().getSelectedItem();
                     String tekst = dsf.getjTextArea1().getText().trim();
+
+                    if (!validiraj(trajanjeStr, u)) return;
+
+                    int trajanje = Integer.parseInt(trajanjeStr);
                     StavkaZapisnika sz = new StavkaZapisnika(dsf.getZapisnik(), 0, tekst, trajanje, u);
                     dsf.getStavke().add(sz);
                     dsf.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(dsf, "Greska u nekom od polja", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(dsf, "Sistem ne moze da zapamti stavku zapisnika", "Greska", JOptionPane.ERROR_MESSAGE);
                     ex.printStackTrace();
                 }
             }
         });
 
-        // jButtonDodaj2 - mod=false, new zapisnik being created
         dsf.addbtnDodaj2ActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int trajanje = Integer.parseInt(dsf.getjTextFieldTrajanje().getText().trim());
+                    String trajanjeStr = dsf.getjTextFieldTrajanje().getText().trim();
                     Usluga u = (Usluga) dsf.getjComboBox1().getSelectedItem();
                     String tekst = dsf.getjTextArea1().getText().trim();
+
+                    if (!validiraj(trajanjeStr, u)) return;
+
+                    int trajanje = Integer.parseInt(trajanjeStr);
                     StavkaZapisnika sz = new StavkaZapisnika(dsf.getZapisnik(), 0, tekst, trajanje, u);
-                    dsf.getStavke().add(sz); // adds to the same stavke reference from DodajZapisnikController
+                    dsf.getStavke().add(sz);
                     dsf.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(dsf, "Greska u nekom od polja", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(dsf, "Sistem ne moze da zapamti stavku zapisnika", "Greska", JOptionPane.ERROR_MESSAGE);
                     ex.printStackTrace();
                 }
             }
@@ -68,7 +86,7 @@ public class DodajStavku2Controller {
 
     public void otvoriFormu(boolean mod) {
         pripremiFormu(mod);
-        dsf.setVisible(true); 
+        dsf.setVisible(true);
     }
 
     public void pripremiFormu(boolean mod) {
@@ -77,14 +95,12 @@ public class DodajStavku2Controller {
         for (Usluga k : usluge) {
             dsf.getjComboBox1().addItem(k);
         }
-        if (mod==true) {
+        if (mod) {
             dsf.getjButtonDodaj().setVisible(true);
             dsf.getjButtonDodaj2().setVisible(false);
-        }else{
+        } else {
             dsf.getjButtonDodaj().setVisible(false);
             dsf.getjButtonDodaj2().setVisible(true);
         }
-
-
     }
 }
