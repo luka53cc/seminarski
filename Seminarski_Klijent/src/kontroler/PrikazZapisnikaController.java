@@ -64,7 +64,7 @@ public class PrikazZapisnikaController {
             public void actionPerformed(ActionEvent e) {
                 int red = pzf.getjTableZapisnici().getSelectedRow();
                 if (red == -1) {
-                    JOptionPane.showMessageDialog(pzf, "Sistem ne moze da nadje polaznika", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(pzf, "Sistem ne moze da nadje zapisnik", "Greska", JOptionPane.ERROR_MESSAGE);
                 } else {
                     //JOptionPane.showMessageDialog(ppf, "Sistem je nasao zapisnik", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
                     ModelTabeleZapisnici mtp = (ModelTabeleZapisnici) pzf.getjTableZapisnici().getModel();
@@ -79,17 +79,15 @@ public class PrikazZapisnikaController {
         pzf.addbtnPretraziActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 String tekst = pzf.getjTextFieldTekst().getText().trim();
-                int trajanje =0;
+                int trajanje = 0;
                 try {
                     trajanje = Integer.parseInt(pzf.getjTextFieldTrajanje().getText().trim());
                 } catch (Exception ex) {
                 }
                 String datumStr = pzf.getjTextFieldDate().getText().trim();
-                
-                Date datumEvidentiranja = null;
 
+                Date datumEvidentiranja = null;
                 if (!datumStr.isEmpty()) {
                     try {
                         datumEvidentiranja = Date.valueOf(datumStr);
@@ -101,11 +99,24 @@ public class PrikazZapisnikaController {
                         return;
                     }
                 }
-
-                ModelTabeleZapisnici mtp= (ModelTabeleZapisnici) pzf.getjTableZapisnici().getModel();
-
+                ModelTabeleZapisnici mtp = (ModelTabeleZapisnici) pzf.getjTableZapisnici().getModel();
                 mtp.pretrazi(tekst, trajanje, datumEvidentiranja);
 
+                if (mtp.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(pzf,
+                            "Sistem ne može da nađe zapisnike po zadatim kriterijumima",
+                            "Informacija",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(pzf,
+                            "Sistem je našao zapisnike po zadatim kriterijumima",
+                            "Informacija",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    /*JOptionPane.showMessageDialog(pzf,
+                            "Sistem je našao zapisnik",
+                            "Informacija",
+                            JOptionPane.INFORMATION_MESSAGE);*/
+                }
             }
         });
         pzf.addbtnResetujActionListener(new ActionListener() {

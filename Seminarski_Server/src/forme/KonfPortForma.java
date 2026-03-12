@@ -86,6 +86,7 @@ public class KonfPortForma extends javax.swing.JDialog {
         }
         if (port>=0 && port<=65535) {
             Konfiguracija.getInstance().setProperty("port", port+"");
+            Konfiguracija.getInstance().sacuvajIzmene();
             JOptionPane.showMessageDialog(this, "Uspesno promenjen port","Uspeh",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }else 

@@ -43,7 +43,7 @@ public class Konfiguracija {
     
     public void sacuvajIzmene(){
         try {
-            konf.store(new FileOutputStream("C:\\PS_K1\\2023_0067\\Seminarski_Server\\config.properties"),null);
+            konf.store(new FileOutputStream("C:\\PS_K1\\seminarski\\Seminarski_Server\\config.properties"),null);
         } catch (Exception e) {
             e.printStackTrace();
         }

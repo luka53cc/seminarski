@@ -76,14 +76,12 @@ public class PrikazPolaznikaController {
         ppf.addbtnPretraziActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 String imeP = ppf.getjTextFieldIP().getText().trim();
                 String jmbg = ppf.getjTextFieldJMBG().getText().trim();
                 String datumStr = ppf.getjTextFieldDate().getText().trim();
                 Kategorija kat = (Kategorija) ppf.getjComboBoxKategorija().getSelectedItem();
 
                 Date datumRodjenja = null;
-
                 if (!datumStr.isEmpty()) {
                     try {
                         datumRodjenja = Date.valueOf(datumStr);
@@ -96,11 +94,21 @@ public class PrikazPolaznikaController {
                     }
                 }
 
-                ModelTabelePolaznik mtp
-                        = (ModelTabelePolaznik) ppf.getjTablePolaznici().getModel();
-
+                ModelTabelePolaznik mtp = (ModelTabelePolaznik) ppf.getjTablePolaznici().getModel();
                 mtp.pretrazi(imeP, jmbg, datumRodjenja, kat);
 
+                if (mtp.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(ppf,
+                            "Sistem ne moze da nadje polaznike po zadatim kriterijumima",
+                            "Greška",
+                            JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(ppf,
+                            "Sistem je nasao polaznike po zadatim kriterijumima",
+                            "Uspeh",
+                            JOptionPane.INFORMATION_MESSAGE);
+
+                }
             }
         });
         ppf.addbtnResetujActionListener(new ActionListener() {

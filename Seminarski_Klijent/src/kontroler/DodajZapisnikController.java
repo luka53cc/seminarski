@@ -49,6 +49,8 @@ public class DodajZapisnikController {
     private boolean validiraj(String datum, String tekst, Polaznik polaznik) {
         if (datum.isEmpty()) {
             JOptionPane.showMessageDialog(dzf, "Datum evidentiranja ne sme biti prazan", "Greska", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(dzf, "Sistem ne moze da zapamti zapisnik", "Greska", JOptionPane.ERROR_MESSAGE);
+
             return false;
         }
         try {
@@ -198,11 +200,17 @@ public class DodajZapisnikController {
     }
 
     public void otvoriFormu(FormaModEnum mod) {
-        pripremiFormu(mod);
-        dzf.setVisible(true);
-        if (mod == FormaModEnum.DODAJ) {
-            JOptionPane.showMessageDialog(dzf, "Sistem je kreirao zapisnik", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            pripremiFormu(mod);
+            dzf.setVisible(true);
+            if (mod == FormaModEnum.DODAJ) {
+                JOptionPane.showMessageDialog(dzf, "Sistem je kreirao zapisnik", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(dzf, "Sistem ne moze da kreira zapisnik", "Uspeh", JOptionPane.ERROR_MESSAGE);
+            }        
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(dzf, "Sistem ne moze da kreira zapisnik", "Uspeh", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
     public void pripremiFormu(FormaModEnum mod) {

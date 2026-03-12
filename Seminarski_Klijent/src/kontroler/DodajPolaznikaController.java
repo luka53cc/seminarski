@@ -159,10 +159,15 @@ public class DodajPolaznikaController {
     }
 
     public void otvoriFormu(FormaModEnum mod) {
-        pripremiFormu(mod);
-        dpf.setVisible(true);
-        if (mod == FormaModEnum.DODAJ) {
-            JOptionPane.showMessageDialog(dpf, "Sistem je kreirao polaznika", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            pripremiFormu(mod);
+            dpf.setVisible(true);
+            if (mod == FormaModEnum.DODAJ) {
+                JOptionPane.showMessageDialog(dpf, "Sistem je kreirao polaznika", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(dpf, "Sistem ne moze da kreira polaznika", "Greska", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
