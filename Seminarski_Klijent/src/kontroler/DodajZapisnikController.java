@@ -205,7 +205,6 @@ public class DodajZapisnikController {
             dzf.setVisible(true);
             if (mod == FormaModEnum.DODAJ) {
                 JOptionPane.showMessageDialog(dzf, "Sistem je kreirao zapisnik", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
-                JOptionPane.showMessageDialog(dzf, "Sistem ne moze da kreira zapisnik", "Uspeh", JOptionPane.ERROR_MESSAGE);
             }        
         } catch (Exception e) {
                 JOptionPane.showMessageDialog(dzf, "Sistem ne moze da kreira zapisnik", "Uspeh", JOptionPane.ERROR_MESSAGE);

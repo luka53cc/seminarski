@@ -22,18 +22,20 @@ public class Usluga implements ApstraktniDomenskiObjekat{
 
     public Usluga() {
     }
-
-    @Override
-    public String toString() {
-        return "Usluga{" + "idUsluga=" + idUsluga + ", opisUsluge=" + opisUsluge + ", trajanjeUsluge=" + trajanjeUsluge + ", cenaUsluge=" + cenaUsluge + '}';
-    }
-
+    
     public Usluga(int idUsluga, String opisUsluge, int trajanjeUsluge, double cenaUsluge) {
         this.idUsluga = idUsluga;
         this.opisUsluge = opisUsluge;
         this.trajanjeUsluge = trajanjeUsluge;
         this.cenaUsluge = cenaUsluge;
     }
+
+    @Override
+    public String toString() {
+        return "Usluga{" + "idUsluga=" + idUsluga + ", opisUsluge=" + opisUsluge + ", trajanjeUsluge=" + trajanjeUsluge + ", cenaUsluge=" + cenaUsluge + '}';
+    }
+
+
 
     @Override
     public int hashCode() {

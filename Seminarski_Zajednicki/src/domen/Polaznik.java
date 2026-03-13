@@ -26,7 +26,8 @@ public class Polaznik implements ApstraktniDomenskiObjekat{
     public Polaznik() {
     }
 
-    public Polaznik(int idPolaznik, String imePrezimePolaznika, String jmbgPolaznika, Date datumrodjenjaPolaznika, Kategorija kategorija) {
+    public Polaznik(int idPolaznik, String imePrezimePolaznika, String jmbgPolaznika,
+            Date datumrodjenjaPolaznika, Kategorija kategorija) {
         this.idPolaznik = idPolaznik;
         this.imePrezimePolaznika = imePrezimePolaznika;
         this.jmbgPolaznika = jmbgPolaznika;

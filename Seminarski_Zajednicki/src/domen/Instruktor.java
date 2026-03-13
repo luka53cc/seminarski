@@ -23,6 +23,20 @@ public class Instruktor implements ApstraktniDomenskiObjekat{
     private String sifra;
     private String brojTelefona;
     private Date datumZaposlenja;
+    
+    public Instruktor() {
+    }
+    
+    public Instruktor(int idInstruktor, String imePrezimeInstruktora, 
+            String korisnickoIme,String sifra, String brojTelefona, 
+            Date datumZaposlenja) {
+        this.idInstruktor = idInstruktor;
+        this.imePrezimeInstruktora = imePrezimeInstruktora;
+        this.korisnickoIme = korisnickoIme;
+        this.sifra = sifra;
+        this.brojTelefona = brojTelefona;
+        this.datumZaposlenja = datumZaposlenja;
+    }
 
     @Override
     public int hashCode() {
@@ -55,17 +69,9 @@ public class Instruktor implements ApstraktniDomenskiObjekat{
         return "Ime prezime: " + imePrezimeInstruktora;
     }
 
-    public Instruktor() {
-    }
 
-    public Instruktor(int idInstruktor, String imePrezimeInstruktora, String korisnickoIme, String sifra, String brojTelefona, Date datumZaposlenja) {
-        this.idInstruktor = idInstruktor;
-        this.imePrezimeInstruktora = imePrezimeInstruktora;
-        this.korisnickoIme = korisnickoIme;
-        this.sifra = sifra;
-        this.brojTelefona = brojTelefona;
-        this.datumZaposlenja = datumZaposlenja;
-    }
+
+
 
     public int getIdInstruktor() {
         return idInstruktor;

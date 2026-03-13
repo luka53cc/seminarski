@@ -29,7 +29,8 @@ public class Zapisnik implements ApstraktniDomenskiObjekat{
     public Zapisnik() {
     }
 
-    public Zapisnik(int idZapisnik, Date datumEvidentiranja, String tekst, int ukupnoTrajanje, Instruktor instruktor, Polaznik polaznik, List<StavkaZapisnika> stavkeZapisnika) {
+    public Zapisnik(int idZapisnik, Date datumEvidentiranja, String tekst, int ukupnoTrajanje,
+            Instruktor instruktor, Polaznik polaznik, List<StavkaZapisnika> stavkeZapisnika) {
         this.idZapisnik = idZapisnik;
         this.datumEvidentiranja = datumEvidentiranja;
         this.tekst = tekst;
